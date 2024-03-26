@@ -1,0 +1,131 @@
+const express = require('express');
+const cors = require('cors');
+const path = require('path')
+const { PrismaClient } = require('@prisma/client');
+const upload = require('./upload');
+
+const router = express.Router();
+
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionSuccessStatus: 200
+};
+
+router.use(cors(corsOptions)); // Apply CORS middleware to all routes
+
+const prisma = new PrismaClient();
+
+// Connect to Prisma client
+prisma.$connect()
+  .then(() => { console.log("Database Connected Successfully!"); })
+  .catch(error => { console.error("Error Connecting to the Database!", error); });
+
+
+
+// Define route to check if API is working
+router.get('/', async (req, res, next) => {
+  res.send({ message: 'API is working 🚀' });
+});
+
+// Define route to handle file uploads
+router.post('/uploadbreakfast', upload.single('file'), async (req, res, next) => {
+  try {
+    const { name, price, description } = req.body;
+    const filename = req.file.filename;
+
+    const foods = await prisma.food.create({
+      data: {
+        file: filename,
+        name,
+        price: parseFloat(price),
+        description
+      }
+    });
+
+    res.json('uploaded');
+  } catch (error) {
+    next({ status: 500, message: error.message || 'Internal Server Error' });
+  }
+});
+router.post('/uploadlunch', upload.single('file'), async (req, res, next) => {
+  try {
+    const { name, price, description } = req.body;
+    const filename = req.file.filename;
+
+    const foods = await prisma.lunch.create({
+      data: {
+        file: filename,
+        name,
+        price: parseFloat(price),
+        description
+      }
+    });
+
+    res.json('uploaded');
+  } catch (error) {
+    next({ status: 500, message: error.message || 'Internal Server Error' });
+  }
+});
+router.post('/uploadsuper', upload.single('file'), async (req, res, next) => {
+  try {
+    const { name, price, description } = req.body;
+    const filename = req.file.filename;
+
+    const foods = await prisma.super.create({
+      data: {
+        file: filename,
+        name,
+        price: parseFloat(price),
+        description
+      }
+    });
+
+    res.json('uploaded');
+  } catch (error) {
+    next({ status: 500, message: error.message || 'Internal Server Error' });
+  }
+});
+router.post('/verify', async (req, res, next) => {
+  try {
+    const { password } = req.body;
+    const pass = await prisma.verify.findUnique({ where: { password: parseInt(password) } });
+    if (pass) {
+      res.json("verified");
+    } else {
+      res.json("Unauthorized Access");
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+// Define route to fetch uploads
+router.get('/getbreakfast', async (req, res, next) => {
+  try {
+    const foods = await prisma.food.findMany();
+    res.json(foods);
+  } catch (error) {
+    next(error);
+  }
+});
+router.get('/getlunch', async (req, res, next) => {
+  try {
+    const foods = await prisma.lunch.findMany();
+    res.json(foods);
+  } catch (error) {
+    next(error);
+  }
+});
+router.get('/getsupper', async (req, res, next) => {
+  try {
+    const foods = await prisma.super.findMany();
+    res.json(foods);
+  } catch (error) {
+    next(error);
+  }
+});
+
+module.exports = router;
