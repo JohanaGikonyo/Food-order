@@ -12,7 +12,9 @@ function Products() {
     const [supper, setSupper] = useState([])
     const [clickedItems, setClickedItems] = useState([])
     const { increment } = countStore();
-    const { select } = selectedItemsStore()
+    const { select, selected } = selectedItemsStore()
+
+
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -53,10 +55,12 @@ function Products() {
     const handleItemClicked = (id) => {
         setClickedItems([...clickedItems, id])
     }
-
     const isItemClicked = (id) => {
-        // Ensure clickedItems is an array before calling includes
-        return Array.isArray(clickedItems) && clickedItems.includes(id);
+        return clickedItems.includes(id);
+    };
+
+    const isItemSelected = (id) => {
+        return selected.some(item => item.id === id);
     };
     const selectedItem = (item) => {
         select(item)
@@ -76,9 +80,11 @@ function Products() {
                                 <h2>{item.name}</h2>
                                 <button className='absolute top-[50%] left-1 text-red-500 text-xl rounded p-0.5'><h3><span>kshs.</span>  {item.price}</h3></button>
                                 <h4>{item.description}</h4>
-                                <button className={`${isItemClicked(item.id) ? 'hidden' : ""}bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1`} onClick={() => { handleCount(); handleItemClicked(item.id); selectedItem(item) }}>Add To Cart</button>
-                                <button className={`${!isItemClicked(item.id) ? "hidden " : ''}bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1 `} >Added</button>
-                            </div>
+                                {isItemSelected(item.id) ? (
+                                    <button className="bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1">Added</button>
+                                ) : (
+                                    <button className={`${isItemClicked(item.id) ? 'hidden' : ""} bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1`} onClick={() => { handleCount(); handleItemClicked(item.id); selectedItem(item) }}>Add To Cart</button>
+                                )}</div>
                         ))
                     ) : (
                         <div>
@@ -109,9 +115,11 @@ function Products() {
                                 <h2>{item.name}</h2>
                                 <button className='absolute top-[50%] left-1 text-red-500 text-xl rounded p-0.5'><h3><span>kshs.</span>  {item.price}</h3></button>
                                 <h4>{item.description}</h4>
-                                <button className={`${isItemClicked(item.id) ? 'hidden' : ""}bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1`} onClick={() => { handleCount(); handleItemClicked(item.id); selectedItem(item) }}>Add To Cart</button>
-                                <button className={`${!isItemClicked(item.id) ? "hidden " : ''}bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1 `} >Added</button>
-                            </div>
+                                {isItemSelected(item.id) ? (
+                                    <button className="bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1">Added</button>
+                                ) : (
+                                    <button className={`${isItemClicked(item.id) ? 'hidden' : ""} bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1`} onClick={() => { handleCount(); handleItemClicked(item.id); selectedItem(item) }}>Add To Cart</button>
+                                )}</div>
                         ))
                     ) : (
                         <div>
@@ -140,9 +148,11 @@ function Products() {
                                 <h2>{item.name}</h2>
                                 <button className='absolute top-[50%] left-1 text-red-500 text-xl rounded p-0.5'><h3><span>kshs.</span>  {item.price}</h3></button>
                                 <h4>{item.description}</h4>
-                                <button className={`${isItemClicked(item.id) ? 'hidden' : ""}bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1`} onClick={() => { handleCount(); handleItemClicked(item.id); selectedItem(item) }}>Add To Cart</button>
-                                <button className={`${!isItemClicked(item.id) ? "hidden " : ''}bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1 `} >Added</button>
-                            </div>
+                                {isItemSelected(item.id) ? (
+                                    <button className="bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1">Added</button>
+                                ) : (
+                                    <button className={`${isItemClicked(item.id) ? 'hidden' : ""} bg-orange-400 text-white p-1 rounded absolute right-1 bottom-1`} onClick={() => { handleCount(); handleItemClicked(item.id); selectedItem(item) }}>Add To Cart</button>
+                                )}</div>
                         ))
                     ) : (
                         <div>
