@@ -8,7 +8,7 @@ const upload = require('./upload');
 const router = express.Router();
 
 const corsOptions = {
-  origin: 'https://food-order-app-sand.vercel.app/',
+  origin: 'https://food-order-app-sand.vercel.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionSuccessStatus: 200
