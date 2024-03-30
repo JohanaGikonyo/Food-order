@@ -139,13 +139,13 @@ router.post('/signin', async (req, res, next) => {
   try {
 
     const user = await prisma.user.findUnique({ where: { email: email } })
-    const hashedPasswor = await bcrypt.hash(password, 10)
+    const hashedPassword = await bcrypt.hash(password, 10)
     if (user) {
       res.json("user exists")
     }
     else {
 
-      await prisma.user.create({ data: { email: email, password: hashedPasswor } })
+      await prisma.user.create({ data: { email: email, password: hashedPassword } })
       res.json("submitted")
 
     }
