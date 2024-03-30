@@ -158,7 +158,7 @@ function Upload() {
                 <Stack sx={{ width: '100% ', height: '20px' }} spacing={2}>
                     {errorAlert ? <Alert variant="filled" severity="error" onClose={() => { setErrorAlert(prev => !prev); setCircularProgress(false); setPassword("") }}>
                         <AlertTitle>Error</AlertTitle>
-                        Ooops! Something Wrong!
+                        Ooops! Something went wrong!
                     </Alert> : ""}
                     {successAlert ? <Alert variant="filled" severity="success" onClose={() => { setSuccessAlert(prev => !prev), setView(true) }}>
                         <AlertTitle>Success</AlertTitle>
