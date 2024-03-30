@@ -39,7 +39,7 @@ function Upload() {
         setIsLoading(true);
         try {
             setCircularProgress(true)
-            const response = await axios.post('https://food-order-app3.onrender.com/api/verify', { password })
+            const response = await axios.post('https://zivato-foods.onrender.com/api/verify', { password })
             if (response.data === "verified") {
                 setCircularProgress(false)
                 setSuccessAlert(true)
@@ -73,7 +73,7 @@ function Upload() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.post('https://food-order-app3.onrender.com/api/uploadbreakfast', formData);
+            const response = await axios.post('https://zivato-foods.onrender.com/api/uploadbreakfast', formData);
             console.log(response.data);
             if (response.data === "uploaded") {
                 setCircularProgress(false)
@@ -101,7 +101,7 @@ function Upload() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.post('https://food-order-app3.onrender.com/api/uploadlunch', formData);
+            const response = await axios.post('https://zivato-foods.onrender.com/api/uploadlunch', formData);
             console.log(response.data);
             if (response.data === "uploaded") {
                 setCircularProgress(false)
@@ -129,7 +129,7 @@ function Upload() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.post('https://food-order-app3.onrender.com/api/uploadsuper', formData);
+            const response = await axios.post('https://zivato-foods.onrender.com/api/uploadsuper', formData);
             console.log(response.data);
 
             if (response.data === "uploaded") {

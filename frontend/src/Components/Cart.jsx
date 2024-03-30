@@ -54,7 +54,7 @@ function Cart() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5">
                         {cost === 0 ? <h1 className="col-span-full text-center">No items In the Cart</h1> : selected.map((item) => (
                             <div key={item.id} className="flex flex-col items-center justify-between bg-white shadow-md rounded-md p-5 relative">
-                                <img src={`https://food-order-app3.onrender.com/${item.file}`} alt="" className="w-[75%] h-40 object-cover mb-3" />
+                                <img src={`https://zivato-foods.onrender.com/${item.file}`} alt="" className="w-[75%] h-40 object-cover mb-3" />
                                 <h3 className="text-lg font-semibold">{item.name}</h3>
                                 <h4 className="text-red-500 font-semibold mb-3">Kshs. {item.price}</h4>
                                 <div className="flex items-center">

@@ -61,7 +61,7 @@ function SignIn() {
         e.preventDefault()
         try {
             setCircularProgress(true)
-            const response = await axios.post('https://food-order-app3.onrender.com/api/signin', { email, password })
+            const response = await axios.post('https://zivato-foods.onrender.com/api/signin', { email, password })
             if (response.data === "user exists") {
                 setCircularProgress(false)
                 setErrorAlert(true)
