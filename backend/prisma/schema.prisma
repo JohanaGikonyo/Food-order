@@ -44,3 +44,9 @@ model Verify {
   id       Int @id @default(autoincrement())
   password Int @unique
 }
+
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+}

@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcrypt')
 const cors = require('cors');
 const path = require('path')
 const { PrismaClient } = require('@prisma/client');
@@ -127,5 +128,49 @@ router.get('/getsupper', async (req, res, next) => {
     next(error);
   }
 });
+
+
+
+//Login and SignIn
+router.post('/signin', async (req, res, next) => {
+  const { email, password } = req.body;
+
+
+  try {
+
+    const user = await prisma.user.findUnique({ where: { email: email } })
+    const hashedPasswor = await bcrypt.hash(password, 10)
+    if (user) {
+      res.json("user exists")
+    }
+    else {
+
+      await prisma.user.create({ data: { email: email, password: hashedPasswor } })
+      res.json("submitted")
+
+    }
+
+  } catch (error) {
+    next(error)
+
+  }
+})
+
+router.post('/login', async (req, res, next) => {
+  const { email, password } = req.body;
+  try {
+    const user = await prisma.user.findUnique({ where: { email: email, password: password } })
+    if (user) {
+      res.json("user exists")
+    }
+    else {
+      res.json("user dont exist")
+    }
+
+  } catch (error) {
+    next(error)
+
+  }
+})
 
 module.exports = router;

@@ -75,13 +75,13 @@ function Navbar() {
     }));
 
     return (
-        <div className="flex flex-row justify-between p-0 m-0 items-center sticky top-0 z-50 bg-white">
+        <div className="flex flex-row justify-between pb-5 pt-5 m-0 items-center sticky top-0 z-50 bg-white">
             <div className="text-orange-400 font-bold text-3xl">Ziva<span className="text-black">to</span></div>
             <div className="flex flex-row items-center justify-between gap-10">
                 <div className="hidden lg:flex lg:flex-row lg:items-center lg:justify-between lg:gap-5 ">
                     <NavLink to='/'><button className="flex items-center gap-2 p-2 rounded-[15px]">Home</button></NavLink>
                     <NavLink to='/menu'><button className="flex items-center gap-2 p-2 rounded-[15px]">Menu</button></NavLink>
-                    <NavLink to='/service'><button className="flex items-center gap-2 p-2 rounded-[15px]">Service</button></NavLink>
+                    {/* <NavLink to='/service'><button className="flex items-center gap-2 p-2 rounded-[15px]">Service</button></NavLink> */}
                 </div>
                 <div className="flex items-center gap-5">
                     <Search>
@@ -97,7 +97,7 @@ function Navbar() {
                 <div className="hidden lg:flex lg:justify-between gap-5 items-center">
                     <NavLink to='/signin' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]"><span><GroupAddOutlinedIcon /></span>SignIn</button></NavLink>
                     <NavLink to='/login' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[10px] bg-orange-500"><span><LoginOutlinedIcon /></span>LogIn</button></NavLink>
-                    <NavLink to="/upload" onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Upload</button></NavLink>
+                    <NavLink to="/upload" onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Admin</button></NavLink>
 
                 </div>
                 <div className="flex items-center gap-5">
@@ -109,7 +109,7 @@ function Navbar() {
                     <div ref={menuRef} className="sm:hidden flex flex-col items-center justify-center gap-5 bg-gray-200 p-5 absolute top-[70px] right-0 left-0 z-50 transition-transform transform scale-110">
                         <NavLink to='/' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]  border-b-2 w-[100%]">Home</button></NavLink>
                         <NavLink to='/menu' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Menu</button></NavLink>
-                        <NavLink to='/service' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Service</button></NavLink>
+                        {/* <NavLink to='/service' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Service</button></NavLink>*/}
                         <NavLink to='/signin' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]"><span><GroupAddOutlinedIcon /></span>SignIn</button></NavLink>
                         <NavLink to='/login' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[10px] bg-orange-500"><span><LoginOutlinedIcon /></span>LogIn</button></NavLink>
                         <NavLink to="/upload" onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Upload</button></NavLink>

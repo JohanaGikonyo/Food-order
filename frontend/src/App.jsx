@@ -2,7 +2,7 @@
 import './App.css'
 import Menu from './Components/Menu'
 import Upload from './Components/Upload'
-import Navbar from './Components/Navigate/Navbar'
+// import Navbar from './Components/Navigate/Navbar'
 import Cart from './Components/Cart'
 import { Route, Routes } from 'react-router-dom'
 import Home from './Components/Home'
@@ -13,7 +13,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      { }
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/menu' element={<Menu />} />
@@ -21,6 +21,8 @@ function App() {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/upload' element={<Upload />} />
         <Route path='/cart' element={<Cart />} />
+
+
 
       </Routes>
 

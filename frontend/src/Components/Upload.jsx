@@ -10,6 +10,10 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import InputLabel from '@mui/material/InputLabel';
 import IconButton from '@mui/material/IconButton';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import AlertTitle from '@mui/material/AlertTitle';
 
 function Upload() {
     const [file, setFile] = useState(null)
@@ -19,6 +23,11 @@ function Upload() {
     const [password, setPassword] = useState()
     const [showPassword, setShowPassword] = useState(false);
     const [view, setView] = useState(false)
+    const [circularProgress, setCircularProgress] = useState(false)
+    const [successAlert, setSuccessAlert] = useState(false)
+    const [errorAlert, setErrorAlert] = useState(false)
+    const [foodCategory, setFoodCategory] = useState('')
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event) => {
@@ -27,16 +36,30 @@ function Upload() {
 
     const handleVerification = async (e) => {
         e.preventDefault()
+        setIsLoading(true);
         try {
+            setCircularProgress(true)
             const response = await axios.post('http://localhost:3000/api/verify', { password })
-            alert(response.data)
             if (response.data === "verified") {
-                setView(true)
-            } else {
-                alert("Incorrect password!")
+                setCircularProgress(false)
+                setSuccessAlert(true)
+
+
             }
+            else {
+                setCircularProgress(false)
+                setErrorAlert(true)
+
+            }
+
+
         } catch (error) {
-            console.error("An error Occurred", error)
+            console.error(error)
+            setErrorAlert(true)
+            setCircularProgress(false)
+
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -49,19 +72,27 @@ function Upload() {
             formData.append('description', description);
             formData.append('price', price);
             console.log(formData)
-
+            setCircularProgress(true)
             const response = await axios.post('http://localhost:3000/api/uploadbreakfast', formData);
             console.log(response.data);
-
-            alert(response.data);
+            if (response.data === "uploaded") {
+                setCircularProgress(false)
+                setSuccessAlert(true)
+            }
+            else {
+                setCircularProgress(false)
+                setErrorAlert(true)
+            }
         } catch (error) {
             console.error("An error occurred", error);
-            alert("An error occured", error)
+            setErrorAlert(true)
+            setCircularProgress(false)
         }
     }
 
     const handleLunch = async (e) => {
         e.preventDefault();
+
         try {
             const formData = new FormData();
             formData.append('file', file);
@@ -69,19 +100,27 @@ function Upload() {
             formData.append('description', description);
             formData.append('price', price);
             console.log(formData)
-
+            setCircularProgress(true)
             const response = await axios.post('http://localhost:3000/api/uploadlunch', formData);
             console.log(response.data);
-
-            alert(response.data);
+            if (response.data === "uploaded") {
+                setCircularProgress(false)
+                setSuccessAlert(true)
+            }
+            else {
+                setCircularProgress(false)
+                setErrorAlert(true)
+            }
         } catch (error) {
             console.error("An error occurred", error);
-            alert("An error occured", error)
+            setErrorAlert(true)
+            setCircularProgress(false)
         }
     }
 
     const handleSupper = async (e) => {
         e.preventDefault();
+
         try {
             const formData = new FormData();
             formData.append('file', file);
@@ -89,19 +128,45 @@ function Upload() {
             formData.append('description', description);
             formData.append('price', price);
             console.log(formData)
-
+            setCircularProgress(true)
             const response = await axios.post('http://localhost:3000/api/uploadsuper', formData);
             console.log(response.data);
 
-            alert(response.data);
+            if (response.data === "uploaded") {
+                setCircularProgress(false)
+                setSuccessAlert(true)
+            }
+            else {
+                setCircularProgress(false)
+                setErrorAlert(true)
+            }
         } catch (error) {
             console.error("An error occurred", error);
-            alert("An error occured", error)
+            setErrorAlert(true)
+            setCircularProgress(false)
         }
     }
 
     return (
-        <div className='flex items-center justify-around align-middle bg-gray-100 min-h-screen'>
+        <div className='lg:flex items-center justify-around align-middle bg-gray-100 min-h-screen relative block'>
+            {isLoading && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+                    <CircularProgress color="secondary" />
+                </div>
+            )}
+            <div className="absolute  top-[35%]  z-40 ">
+                <Stack sx={{ width: '100% ', height: '20px' }} spacing={2}>
+                    {errorAlert ? <Alert variant="filled" severity="error" onClose={() => { setErrorAlert(prev => !prev); setCircularProgress(false); setPassword("") }}>
+                        <AlertTitle>Error</AlertTitle>
+                        Ooops! Something Wrong!
+                    </Alert> : ""}
+                    {successAlert ? <Alert variant="filled" severity="success" onClose={() => { setSuccessAlert(prev => !prev), setView(true) }}>
+                        <AlertTitle>Success</AlertTitle>
+                        Successful. Thank You!
+                    </Alert> : ""}
+
+                </Stack>
+            </div>
             {!view ? (
                 <form onSubmit={handleVerification} className='flex items-center flex-col gap-3'>
                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
@@ -125,13 +190,31 @@ function Upload() {
                             label="Password"
                         />
                     </FormControl>
-                    <button className='border p-1 rounded text-white bg-orange-600'><input type='submit' value="Submit" /></button>
-                </form>
+                    <button
+                        className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
+                        type="submit"
+
+                    >
+                        {circularProgress ? <Box sx={{ display: 'flex' }} >
+                            <CircularProgress className='h-1 w-1 text-orange-400' />
+                        </Box> : ""}  Submit
+                    </button></form>
             ) : null}
+            {view ?
+                <select
+                    className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ]"
+                    onChange={(e) => setFoodCategory(e.target.value)}
+                >
+                    <option value="">Choose Category</option>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="supper">Dinner</option>
+                </select>
+                : ""}
 
             {view ? (
                 <div>
-                    <form action="" onSubmit={handleBreakfast} className='flex flex-col gap-10 justify-between items-center m-10'>
+                    {foodCategory === "breakfast" || foodCategory === "" ? <form action="" onSubmit={handleBreakfast} className='flex flex-col gap-10 justify-between items-center m-10'>
                         <h1 className='border-b-2 border-red-500'>BreakFast Food</h1>
                         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                             <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
@@ -171,11 +254,20 @@ function Upload() {
                                     }}
                                     onChange={(e) => { setDescription(e.target.value) }}
                                 />
-                                <button className='border p-1 rounded text-white bg-orange-600 w-[15%]'><input type='submit' value="Submit" /></button>
-                            </div>
+                                <button
+                                    className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
+                                    type="submit"
+
+                                >
+                                    {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                        <CircularProgress className='h-1 w-1 text-orange-400' />
+                                    </Box> : ""}  Submit
+                                </button></div>
                         </Box>
-                    </form>
-                    <form action="" onSubmit={handleLunch} className='flex flex-col gap-10 justify-between items-center m-10'>
+                    </form> : " "}
+
+
+                    {foodCategory === "lunch" ? <form action="" onSubmit={handleLunch} className='flex flex-col gap-10 justify-between items-center m-10'>
                         <h1 className='border-b-2 border-red-500'>Lunch Food</h1>
                         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                             <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
@@ -215,12 +307,19 @@ function Upload() {
                                     }}
                                     onChange={(e) => { setDescription(e.target.value) }}
                                 />
-                                <button className='border p-1 rounded text-white bg-orange-600 w-[15%]'><input type='submit' value="Submit" /></button>
-                            </div>
-                        </Box>
-                    </form>
+                                <button
+                                    className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
+                                    type="submit"
 
-                    <form action="" onSubmit={handleSupper} className='flex flex-col gap-10 justify-between items-center m-10'>
+                                >
+                                    {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                        <CircularProgress className='h-1 w-1 text-orange-400' />
+                                    </Box> : ""}  Submit
+                                </button></div>
+                        </Box>
+                    </form> : ""}
+
+                    {foodCategory === "supper" ? <form action="" onSubmit={handleSupper} className='flex flex-col gap-10 justify-between items-center m-10'>
                         <h1 className='border-b-2 border-red-500'>Supper Food</h1>
                         <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
                             <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
@@ -260,15 +359,23 @@ function Upload() {
                                     }}
                                     onChange={(e) => { setDescription(e.target.value) }}
                                 />
-                                <button className='border p-1 rounded text-white bg-orange-600 w-[15%]'><input type='submit' value="Submit" /></button>
-                            </div>
+                                <button
+                                    className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
+                                    type="submit"
+
+                                >
+                                    {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                        <CircularProgress className='h-1 w-1 text-orange-400' />
+                                    </Box> : ""}  Submit
+                                </button></div>
                         </Box>
-                    </form>
+                    </form> : ""}
 
 
                 </div>
-            ) : null}
-        </div>
+            ) : null
+            }
+        </div >
     );
 }
 
