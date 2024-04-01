@@ -175,7 +175,7 @@ function Items() {
 
             <div className='flex flex-col justify-around p-5 relative' >
                 {/* Success and Error Alerts */}
-                <div className="absolute top-[35%] z-40 h-40 w-[100%]">
+                <div className=" top-[35%] z-40 h-50 w-[50%] sticky">
                     <Stack sx={{ width: '100%', height: '20px' }} spacing={2}>
                         {errorAlert && (
                             <Alert variant="filled" severity="error" onClose={() => setErrorAlert(false)}>

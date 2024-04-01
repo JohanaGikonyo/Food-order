@@ -195,36 +195,32 @@ router.post('/deletebreakfast/:id', async (req, res, next) => {
 router.post('/deletelunch/:id', async (req, res, next) => {
   const id = req.params.id;
   try {
-    const findItem = await prisma.food.findUnique({ where: { id: parseInt(id) } })
+    const findItem = await prisma.lunch.findUnique({ where: { id: parseInt(id) } });
     if (findItem) {
-      await prisma.food.delete({ where: { id: parseInt(id) } })
-      res.json("deleted")
+      await prisma.lunch.delete({ where: { id: parseInt(id) } });
+      res.json("deleted");
+    } else {
+      res.json("not deleted");
     }
-    else {
-      res.json("not deleted")
-    }
-
   } catch (error) {
-    next(error)
-
+    next(error);
   }
-})
+});
+
 router.post('/deletesupper/:id', async (req, res, next) => {
   const id = req.params.id;
   try {
-    const findItem = await prisma.food.findUnique({ where: { id: parseInt(id) } })
+    const findItem = await prisma.super.findUnique({ where: { id: parseInt(id) } });
     if (findItem) {
-      await prisma.food.delete({ where: { id: parseInt(id) } })
-      res.json("deleted")
+      await prisma.super.delete({ where: { id: parseInt(id) } });
+      res.json("deleted");
+    } else {
+      res.json("not deleted");
     }
-    else {
-      res.json("not deleted")
-    }
-
   } catch (error) {
-    next(error)
-
+    next(error);
   }
-})
+});
+
 
 module.exports = router;
