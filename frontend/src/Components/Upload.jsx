@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import axios from 'redaxios'
 import Box from '@mui/material/Box';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -144,9 +144,9 @@ function Upload() {
             setCircularProgress(false)
         }
     }
-    useEffect(() => {
-        setFile(null), setName(''), setDescription(''), setPrice()
-    })
+    // useEffect(() => {
+    //     setFile(null), setName(''), setDescription(''), setPrice()
+    // }, [])
 
     return (
         <div className="flex justify-center items-center h-full bg-gray-100 ">
@@ -387,11 +387,11 @@ function Upload() {
                             </Box>
                         </form> : ""}
 
-
+                        <div className='border-t-2 border-orange-400'><NavLink to="/items"><span><button>View Items</button></span></NavLink></div>
                     </div>
                 ) : null
                 }
-                <div className='border-t-2 border-orange-400'><NavLink to="/items"><span><button>View Items</button></span></NavLink></div>
+
             </div >
         </div >
     );

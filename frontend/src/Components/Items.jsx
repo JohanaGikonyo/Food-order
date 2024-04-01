@@ -84,21 +84,21 @@ function Items() {
         }
 
     }
-    const handleUpdateBreakfast = async (id) => {
-        try {
-            const response = await axios.post(`https://zivato-foods.onrender.com/api/updatebreakfast/${id}`);
-            if (response.data === "updated") {
-                history('/items')
-                setSuccessAlert(true)
-            }
-            else {
-                setErrorAlert(true)
-            }
-        } catch (error) {
-            console.error('An error occurred', error);
-        }
+    // const handleUpdateBreakfast = async (id) => {
+    //     try {
+    //         const response = await axios.post(`https://zivato-foods.onrender.com/api/updatebreakfast/${id}`);
+    //         if (response.data === "updated") {
+    //             history('/items')
+    //             setSuccessAlert(true)
+    //         }
+    //         else {
+    //             setErrorAlert(true)
+    //         }
+    //     } catch (error) {
+    //         console.error('An error occurred', error);
+    //     }
 
-    }
+    // }
     const handleDeleteLunch = async (id) => {
         try {
             setLunchLoading(false);
@@ -119,21 +119,7 @@ function Items() {
         }
 
     }
-    // const handleUpdateLunch = async (id) => {
-    //     try {
-    //         const response = await axios.post(`https://zivato-foods.onrender.com/api/updatelunch/${id}`);
-    //         if (response.data === "updated") {
-    //             history('/menu')
-    //             setSuccessAlert(true)
-    //         }
-    //         else {
-    //             setErrorAlert(true)
-    //         }
-    //     } catch (error) {
-    //         console.error('An error occurred', error);
-    //     }
 
-    // }
     const handleDeleteSupper = async (id) => {
         try {
             setSupperLoading(true)
@@ -154,22 +140,14 @@ function Items() {
         }
 
     }
-    // const handleUpdateSupper = async (id) => {
-    //     try {
-    //         const response = await axios.post(`https://zivato-foods.onrender.com/api/updatesupper/${id}`);
-    //         if (response.data === "updated") {
-    //             history('/items')
-    //             setSuccessAlert(true)
-    //         }
-    //         else {
-    //             setErrorAlert(true)
-    //         }
-    //     } catch (error) {
-    //         console.error('An error occurred', error);
-    //     }
 
-    // }
-
+    const handleUpdate = (item) => {
+        history('/update');
+        setFile(item.file);
+        setName(item.name);
+        setPrice(item.price);
+        setDescription(item.description);
+    }
 
     return (
         <div>
@@ -204,7 +182,7 @@ function Items() {
                                     <div className="flex justify-between items-center mb-2">
                                         <h3 className="text-red-500 font-semibold text-lg">Kshs. {item.price}</h3>
                                         <div className='flex flex-row items-center justify-between'>
-                                            <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateBreakfast(item.id), setFile(item.file), setName(item.name), setPrice(item.price), setDescription(item.description), history('/update') }}>update</button>
+                                            <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdate(item) }}>update</button>
 
                                             <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteBreakfast(item.id) }}> {breakfastLoading ? <Box sx={{ display: 'flex' }} >
                                                 <CircularProgress className='h-1 w-1 text-orange-400' />
@@ -245,7 +223,7 @@ function Items() {
                                     <div className="flex justify-between items-center mb-2">
                                         <h3 className="text-red-500 font-semibold text-lg">Kshs. {item.price}</h3>
                                         <div className='flex flex-row items-center justify-between'>
-                                            <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateBreakfast(item.id), setFile(item.file), setName(item.name), setPrice(item.price), setDescription(item.description), history('/update') }}>update</button>
+                                            <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdate(item) }}>update</button>
                                             <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteLunch(item.id) }}> {lunchLoading ? <Box sx={{ display: 'flex' }} >
                                                 <CircularProgress className='h-1 w-1 text-orange-400' />
                                             </Box> : ""}  Delete</button></div>
@@ -284,7 +262,7 @@ function Items() {
                                     <div className="flex justify-between items-center mb-2">
                                         <h3 className="text-red-500 font-semibold text-lg">Kshs. {item.price}</h3>
                                         <div className='flex flex-row items-center justify-between'>
-                                            <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateBreakfast(item.id), setFile(item.file), setName(item.name), setPrice(item.price), setDescription(item.description), history('/update') }}>update</button>
+                                            <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdate(item) }}>update</button>
 
                                             <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteSupper(item.id) }}> {supperLoading ? <Box sx={{ display: 'flex' }} >
                                                 <CircularProgress className='h-1 w-1 text-orange-400' />

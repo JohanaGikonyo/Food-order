@@ -6,59 +6,26 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import InputLabel from '@mui/material/InputLabel';
-import IconButton from '@mui/material/IconButton';
 import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
 import { NavLink } from 'react-router-dom';
 import { formStore } from './store';
+import { useStore } from 'zustand';
 function Update() {
-    const { file, name, description, price, password, setFile, setName, setDescription, setPrice, setPassword } = formStore;
-    const [showPassword, setShowPassword] = useState(false);
-    const [view, setView] = useState(false)
+    const { file, name, description, price, setFile, setName, setDescription, setPrice, setPassword } = useStore(formStore)
+
+    const [view, setView] = useState(true)
     const [circularProgress, setCircularProgress] = useState(false)
     const [successAlert, setSuccessAlert] = useState(false)
     const [errorAlert, setErrorAlert] = useState(false)
     const [foodCategory, setFoodCategory] = useState('')
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
-
-    const handleVerification = async (e) => {
-        e.preventDefault()
-        setIsLoading(true);
-        try {
-            setCircularProgress(true)
-            const response = await axios.post('https://zivato-foods.onrender.com/api/verify', { password })
-            if (response.data === "verified") {
-                setCircularProgress(false)
-                setSuccessAlert(true)
 
 
-            }
-            else {
-                setCircularProgress(false)
-                setErrorAlert(true)
 
-            }
-
-
-        } catch (error) {
-            console.error(error)
-            setErrorAlert(true)
-            setCircularProgress(false)
-
-        } finally {
-            setIsLoading(false);
-        }
-    }
 
     const handleBreakfast = async (e) => {
         e.preventDefault();
@@ -165,37 +132,7 @@ function Update() {
 
                     </Stack>
                 </div>
-                {!view ? (
-                    <form onSubmit={handleVerification} className='flex items-center flex-col gap-3 mt-[25%]'>
-                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                            <OutlinedInput
-                                onChange={(e) => { setPassword(e.target.value) }}
-                                id="outlined-adornment-password"
-                                type={showPassword ? 'text' : 'password'}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                            edge="end"
-                                        >
-                                            {showPassword ? <VisibilityOff /> : <Visibility />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                                label="Password"
-                            />
-                        </FormControl>
-                        <button
-                            className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
-                            type="submit"
 
-                        >
-                            Submit
-                        </button></form>
-                ) : null}
                 {view ?
                     <select
                         className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ] sm:mt-5"
