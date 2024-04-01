@@ -195,8 +195,9 @@ function Items() {
                                         <div className='flex flex-row items-center justify-between'>
                                             <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateBreakfast(item.id) }}>update</button>
 
-                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded `} onClick={() => { handleDeleteBreakfast(item.id) }}>Delete</button>
-                                        </div>
+                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteSupper(item.id) }}> {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                                <CircularProgress className='h-1 w-1 text-orange-400' />
+                                            </Box> : ""}  Delete</button></div>
                                     </div>
 
                                     <p className="text-sm">{item.description}</p>
@@ -234,9 +235,9 @@ function Items() {
                                         <h3 className="text-red-500 font-semibold text-lg">Kshs. {item.price}</h3>
                                         <div className='flex flex-row items-center justify-between'>
                                             <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateLunch(item.id) }}>update</button>
-
-                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded `} onClick={() => { handleDeleteLunch(item.id) }}>Delete</button>
-                                        </div>
+                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteSupper(item.id) }}> {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                                <CircularProgress className='h-1 w-1 text-orange-400' />
+                                            </Box> : ""}  Delete</button></div>
                                     </div>
 
                                     <p className="text-sm">{item.description}</p>
@@ -274,7 +275,7 @@ function Items() {
                                         <div className='flex flex-row items-center justify-between'>
                                             <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateSupper(item.id) }}>update</button>
 
-                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded `} onClick={() => { handleDeleteSupper(item.id) }}> {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteSupper(item.id) }}> {circularProgress ? <Box sx={{ display: 'flex' }} >
                                                 <CircularProgress className='h-1 w-1 text-orange-400' />
                                             </Box> : ""}  Delete</button>
                                         </div>
