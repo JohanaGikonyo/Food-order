@@ -148,7 +148,7 @@ function Upload() {
     }
 
     return (
-        <div className="flex justify-center items-center h-full bg-gray-100">
+        <div className="flex justify-center items-center h-full bg-gray-100 ">
             <div className='lg:flex items-center justify-around align-middle  min-h-screen relative block'>
                 {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
@@ -169,7 +169,7 @@ function Upload() {
                     </Stack>
                 </div>
                 {!view ? (
-                    <form onSubmit={handleVerification} className='flex items-center flex-col gap-3'>
+                    <form onSubmit={handleVerification} className='flex items-center flex-col gap-3 mt-[25%]'>
                         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                             <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                             <OutlinedInput
@@ -201,7 +201,7 @@ function Upload() {
                 ) : null}
                 {view ?
                     <select
-                        className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ]"
+                        className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ] sm:mt-5"
                         onChange={(e) => setFoodCategory(e.target.value)}
                     >
                         <option value="">Choose Category</option>
