@@ -1,4 +1,5 @@
 import img1 from './Assets/breakfast3.jpg';
+import img2 from './Assets/logo2.png'
 import { NavLink } from 'react-router-dom';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -13,12 +14,18 @@ import { useState } from 'react';
 function Home() {
     const [expanded, setExpanded] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [modalImageSrc, setModalImageSrc] = useState(null); // New state to store the clicked image source
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
+
+    const handleClick = (event, imageSrc) => {
+        event.stopPropagation(); // Stop the propagation of the click event
         setAnchorEl(event.currentTarget);
+        setModalImageSrc(imageSrc);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
+        setModalImageSrc(null); // Clear the image source when closing modal
     };
 
     const handleChange = (panel) => (event, isExpanded) => {
@@ -30,7 +37,18 @@ function Home() {
             {/* Left Column with Logo and Motivating Words */}
             <div className="flex flex-col justify-center items-center px-1 py-1 sm:p-12" >
                 <div className="text-center mb-8">
-                    <h1 className="text-5xl font-bold mb-4 text-orange-400">Ziva<span className="text-black">to</span></h1>
+                    <div className="flex flex-row items-center">
+                        <div id="gallery" className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            {/* onClick event now passes image source */}
+
+                            <a href="#" className="group" onClick={(e) => handleClick(e, img2)}>
+                                <img src={img2} alt="Image 2" className="w-full h-auto group-hover:opacity-50" />
+                            </a>
+                        </div>
+                        <h1 className="text-4xl font-bold ml-4 text-orange-400">Ziva<span className="text-black">to</span></h1>
+                    </div>
+
+
                     <span className='flex justify-between gap-4'> <h4 className="text-3xl font-semibold  border-b border-orange-400">Your Food Centre</h4><span><div className="space-y-2">
                         <Button
                             id="basic-button"
@@ -159,11 +177,19 @@ function Home() {
 
                     </div>
                 </div>
-
+                <div className='underline border-b-2 border-orange-400 w-[100%]'>
+                    <h1 ><NavLink to="/menu"><button>Get Started</button></NavLink></h1>
+                </div>
             </div >
 
             {/* Right Column with Image */}
-            <div className="flex items-center justify-center mx-auto" >
+            <div className="flex items-center justify-center mx-auto">
+                {/* Modal for displaying the clicked image */}
+                {modalImageSrc && (
+                    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 flex justify-center items-center" onClick={handleClose}>
+                        <img src={modalImageSrc} alt="Modal Image" className="max-h-full max-w-full" />
+                    </div>
+                )}
                 <img src={img1} alt="Food" className="w-[400px] h-[400px] rounded-lg shadow-md object-cover" />
             </div>
         </div >
