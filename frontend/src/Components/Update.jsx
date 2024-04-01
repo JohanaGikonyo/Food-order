@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import axios from 'redaxios'
 import Box from '@mui/material/Box';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -16,7 +16,7 @@ import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
 import { NavLink } from 'react-router-dom';
 import { formStore } from './store';
-function Upload() {
+function Update() {
     const { file, name, description, price, password, setFile, setName, setDescription, setPrice, setPassword } = formStore;
     const [showPassword, setShowPassword] = useState(false);
     const [view, setView] = useState(false)
@@ -70,7 +70,7 @@ function Upload() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.post('https://zivato-foods.onrender.com/api/uploadbreakfast', formData);
+            const response = await axios.patch('https://zivato-foods.onrender.com/api/uploadbreakfast', formData);
             console.log(response.data);
             if (response.data === "uploaded") {
                 setCircularProgress(false)
@@ -98,7 +98,7 @@ function Upload() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.post('https://zivato-foods.onrender.com/api/uploadlunch', formData);
+            const response = await axios.patch('https://zivato-foods.onrender.com/api/uploadlunch', formData);
             console.log(response.data);
             if (response.data === "uploaded") {
                 setCircularProgress(false)
@@ -126,7 +126,7 @@ function Upload() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.post('https://zivato-foods.onrender.com/api/uploadsuper', formData);
+            const response = await axios.patch('https://zivato-foods.onrender.com/api/uploadsuper', formData);
             console.log(response.data);
 
             if (response.data === "uploaded") {
@@ -143,9 +143,6 @@ function Upload() {
             setCircularProgress(false)
         }
     }
-    useEffect(() => {
-        setFile(null), setName(''), setDescription(''), setPrice()
-    })
 
     return (
         <div className="flex justify-center items-center h-full bg-gray-100 ">
@@ -396,4 +393,4 @@ function Upload() {
     );
 }
 
-export default Upload;
+export default Update;

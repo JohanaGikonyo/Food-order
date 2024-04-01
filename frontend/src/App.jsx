@@ -10,6 +10,7 @@ import SignIn from './Components/Authorization/SignIn'
 import Login from './Components/Authorization/Login'
 import Footer from './Components/Footer'
 import Items from './Components/Items'
+import Update from './Components/Update'
 function App() {
 
 
@@ -24,10 +25,12 @@ function App() {
         <Route path='/upload' element={<Upload />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/items' element={<Items />} />
+        <Route path='/update' element={<Update 
+        />} />
 
 
 
-      </Routes>
+      </Routes >
       <Footer />
 
     </>
