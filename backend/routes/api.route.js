@@ -192,7 +192,7 @@ router.post('/deletebreakfast/:id', async (req, res, next) => {
 
   }
 })
-router.post('/deletelunch', async (req, res, next) => {
+router.post('/deletelunch/:id', async (req, res, next) => {
   const id = req.params.id;
   try {
     const findItem = await prisma.food.findUnique({ where: { id: parseInt(id) } })
@@ -209,7 +209,7 @@ router.post('/deletelunch', async (req, res, next) => {
 
   }
 })
-router.post('/deletesupper', async (req, res, next) => {
+router.post('/deletesupper/:id', async (req, res, next) => {
   const id = req.params.id;
   try {
     const findItem = await prisma.food.findUnique({ where: { id: parseInt(id) } })
