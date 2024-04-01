@@ -1,6 +1,15 @@
 import { selectedItemsStore, countStore } from "./store";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import RemoveOutlinedIcon from '@mui/icons-material/RemoveOutlined';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import CircularProgress from '@mui/material/CircularProgress';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import AlertTitle from '@mui/material/AlertTitle';
+import Box from '@mui/material/Box';
 import { useState, useEffect } from "react";
 import Navbar from "./Navigate/Navbar";
 
@@ -9,6 +18,10 @@ function Cart() {
     const [number, setNumber] = useState({});
     const { increment, decrement } = countStore();
     const [cost, setCost] = useState(0);
+    const [circularProgress, setCircularProgress] = useState(false);
+    const [successAlert, setSuccessAlert] = useState(false)
+    const [errorAlert, setErrorAlert] = useState(false)
+    const [phoneNumber, setPhoneNumber] = useState()
 
     const handleAdd = (id) => {
         setNumber((prev) => ({
@@ -44,10 +57,30 @@ function Cart() {
         });
         setCost(totalCost);
     }, [number, selected]);
+    const handleSubmit = () => {
+        setCircularProgress(true)
+        if (phoneNumber.length < 10) {
+            setErrorAlert(true)
 
+        }
+
+    }
     return (
         <div>
             <Navbar />
+            <div className="absolute  top-[35%]  z-40 ">
+                <Stack sx={{ width: '100% ', height: '20px' }} spacing={2}>
+                    {errorAlert ? <Alert variant="filled" severity="error" onClose={() => { setErrorAlert(prev => !prev); history('/login'); setPhoneNumber("") }}>
+                        <AlertTitle>Error</AlertTitle>
+                        user Exists LogIn
+                    </Alert> : ""}
+                    {successAlert ? <Alert variant="filled" severity="success" onClose={() => { setSuccessAlert(prev => !prev), history('/menu') }}>
+                        <AlertTitle>Success</AlertTitle>
+                        Welcome!
+                    </Alert> : ""}
+
+                </Stack>
+            </div>
             <div className="flex flex-col md:flex-row md:h-full">
 
                 <div className="overflow-y-auto flex-1 p-5">
@@ -70,12 +103,39 @@ function Cart() {
                         ))}
                     </div>
                 </div>
-                <div className="md:border-l md:border-orange-400 md:p-5 bg-white md:w-1/4 flex justify-center items-center">
+                <div className="md:border-l md:border-orange-400 md:p-5 sm:border-l  bg-white md:w-1/4 flex flex-col justify-center items-center">
                     <span>
                         <h2 className="text-xl font-semibold">Total Cost: <span className="text-orange-400">{cost}</span></h2>
                     </span>
+
+                    <form className="w-full max-w-md" onSubmit={handleSubmit}>
+                        <h1 className="text-xl p-3">Initiate PayMent</h1>
+                        <div className="mb-6">
+                            <FormControl fullWidth className="mb-4">
+                                <InputLabel htmlFor="outlined-adornment-email" ></InputLabel>
+                                <OutlinedInput
+                                    id="outlined-adornment-email"
+                                    type="number"
+                                    // value={email}
+                                    onChange={(e) => setPhoneNumber(e.target.value)}
+                                    endAdornment={<InputAdornment position="end">Enter your phone number</InputAdornment>}
+                                    className="w-full"
+                                />
+                            </FormControl>
+                        </div>
+                        <button
+                            className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
+                            type="submit"
+
+                        >
+                            {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                <CircularProgress className='h-1 w-1 text-orange-400' />
+                            </Box> : ""}Pay
+                        </button>
+                    </form>
                 </div>
-            </div></div>
+            </div >
+        </div >
     );
 }
 

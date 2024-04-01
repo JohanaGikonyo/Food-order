@@ -14,7 +14,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
-
+import { NavLink } from 'react-router-dom';
 function Upload() {
     const [file, setFile] = useState(null)
     const [name, setName] = useState()
@@ -374,7 +374,9 @@ function Upload() {
                     </div>
                 ) : null
                 }
-            </div ></div>
+                <div><NavLink to="/items">View Items</NavLink></div>
+            </div >
+        </div >
     );
 }
 

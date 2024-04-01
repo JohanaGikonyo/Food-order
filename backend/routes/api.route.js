@@ -8,7 +8,8 @@ const upload = require('./upload');
 const router = express.Router();
 
 const corsOptions = {
-  origin: 'https://food-order-app-sand.vercel.app',
+  origin: [
+    'https://food-order-app-sand.vercel.app', 'http://localhost:5173'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionSuccessStatus: 200
@@ -165,6 +166,59 @@ router.post('/login', async (req, res, next) => {
     }
     else {
       res.json("user dont exist")
+    }
+
+  } catch (error) {
+    next(error)
+
+  }
+})
+
+router.post('/deletebreakfast/:id', async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const findItem = await prisma.food.findUnique({ where: { id: parseInt(id) } })
+    if (findItem) {
+      await prisma.food.delete({ where: { id: parseInt(id) } })
+      res.json("deleted")
+    }
+    else {
+      res.json("not deleted")
+    }
+
+
+  } catch (error) {
+    next(error)
+
+  }
+})
+router.post('/deletelunch', async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const findItem = await prisma.food.findUnique({ where: { id: parseInt(id) } })
+    if (findItem) {
+      await prisma.food.delete({ where: { id: parseInt(id) } })
+      res.json("deleted")
+    }
+    else {
+      res.json("not deleted")
+    }
+
+  } catch (error) {
+    next(error)
+
+  }
+})
+router.post('/deletesupper', async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const findItem = await prisma.food.findUnique({ where: { id: parseInt(id) } })
+    if (findItem) {
+      await prisma.food.delete({ where: { id: parseInt(id) } })
+      res.json("deleted")
+    }
+    else {
+      res.json("not deleted")
     }
 
   } catch (error) {

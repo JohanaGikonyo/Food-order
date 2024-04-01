@@ -9,6 +9,7 @@ import Home from './Components/Home'
 import SignIn from './Components/Authorization/SignIn'
 import Login from './Components/Authorization/Login'
 import Footer from './Components/Footer'
+import Items from './Components/Items'
 function App() {
 
 
@@ -22,6 +23,7 @@ function App() {
         <Route path='/signin' element={<SignIn />} />
         <Route path='/upload' element={<Upload />} />
         <Route path='/cart' element={<Cart />} />
+        <Route path='/items' element={<Items />} />
 
 
 

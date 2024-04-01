@@ -1,0 +1,291 @@
+import { useEffect, useState } from 'react';
+import axios from 'redaxios';
+import loading1 from './Assets/loading1.json';
+import Lottie from "react-lottie";
+// import { countStore, selectedItemsStore } from './store';
+import Navbar from './Navigate/Navbar';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import AlertTitle from '@mui/material/AlertTitle';
+import { useNavigate } from 'react-router-dom'
+function Items() {
+    const [breakfast, setBreakfast] = useState([]);
+    const [lunch, setLunch] = useState([]);
+    const [supper, setSupper] = useState([]);
+    const [successAlert, setSuccessAlert] = useState(false)
+    const [errorAlert, setErrorAlert] = useState(false)
+    const history = useNavigate()
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+        const fetchItems = async () => {
+            try {
+                const response = await axios.get('https://zivato-foods.onrender.com/api/getbreakfast/');
+                setBreakfast(response.data);
+            } catch (error) {
+                console.error('An error occurred', error);
+            }
+        };
+
+        const Lunch = async () => {
+            try {
+                const response = await axios.get('https://zivato-foods.onrender.com/api/getlunch/');
+                setLunch(response.data);
+            } catch (error) {
+                console.error('An error occurred', error);
+            }
+        };
+
+        const Super = async () => {
+            try {
+                const response = await axios.get('https://zivato-foods.onrender.com/api/getsupper/');
+                setSupper(response.data);
+            } catch (error) {
+                console.error('An error occurred', error);
+            }
+        };
+
+        Super();
+        Lunch();
+        fetchItems();
+    }, []);
+
+
+
+    const handleDeleteBreakfast = async (id) => {
+        try {
+            const response = await axios.post(`https://zivato-foods.onrender.com/api/deletebreakfast/${id}`);
+            if (response.data === "deleted") {
+                history('/items')
+                setSuccessAlert(true)
+            }
+            else {
+                setErrorAlert(true)
+            }
+
+        } catch (error) {
+            console.error('An error occurred', error);
+            setErrorAlert(true)
+        }
+
+    }
+    const handleUpdateBreakfast = async (id) => {
+        try {
+            const response = await axios.post(`https://zivato-foods.onrender.com/api/updatebreakfast/${id}`);
+            if (response.data === "updated") {
+                history('/items')
+                setSuccessAlert(true)
+            }
+            else {
+                setErrorAlert(true)
+            }
+        } catch (error) {
+            console.error('An error occurred', error);
+        }
+
+    }
+    const handleDeleteLunch = async (id) => {
+        try {
+            const response = await axios.post(`https://zivato-foods.onrender.com/api/deletelunch/${id}`);
+            if (response.data === "deleted") {
+                history('/items')
+                setSuccessAlert(true)
+            }
+            else {
+                setErrorAlert(true)
+            }
+        } catch (error) {
+            console.error('An error occurred', error);
+        }
+
+    }
+    const handleUpdateLunch = async (id) => {
+        try {
+            const response = await axios.post(`https://zivato-foods.onrender.com/api/updatelunch/${id}`);
+            if (response.data === "updated") {
+                history('/items')
+                setSuccessAlert(true)
+            }
+            else {
+                setErrorAlert(true)
+            }
+        } catch (error) {
+            console.error('An error occurred', error);
+        }
+
+    }
+    const handleDeleteSupper = async (id) => {
+        try {
+            const response = await axios.post(`https://zivato-foods.onrender.com/api/deletesupper/${id}`);
+            if (response.data === "deleted") {
+                history('/items')
+                setSuccessAlert(true)
+            }
+            else {
+                setErrorAlert(true)
+            }
+        } catch (error) {
+            console.error('An error occurred', error);
+        }
+
+    }
+    const handleUpdateSupper = async (id) => {
+        try {
+            const response = await axios.post(`https://zivato-foods.onrender.com/api/updatesupper/${id}`);
+            if (response.data === "updated") {
+                history('/items')
+                setSuccessAlert(true)
+            }
+            else {
+                setErrorAlert(true)
+            }
+        } catch (error) {
+            console.error('An error occurred', error);
+        }
+
+    }
+
+
+    return (
+        <div>
+            <Navbar />
+
+            <div className='flex flex-col justify-around p-5 relative' >
+                <div className="absolute  top-[35%]  z-40 ">
+                    <Stack sx={{ width: '100% ', height: '20px' }} spacing={2}>
+                        {errorAlert ? <Alert variant="filled" severity="error" onClose={() => { setErrorAlert(prev => !prev); history('/items') }}>
+                            <AlertTitle>Error</AlertTitle>
+                            Either Email or Password is wrong.
+                        </Alert> : ""}
+                        {successAlert ? <Alert variant="filled" severity="success" onClose={() => { setSuccessAlert(prev => !prev), history('/items') }}>
+                            <AlertTitle>Success</AlertTitle>
+                            Welcome!
+                        </Alert> : ""}
+
+                    </Stack>
+                </div>
+                <div className='m-10'>
+                    <h1 className="text-3xl font-bold mb-5">Breakfast Refreshments</h1>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {breakfast.length > 0 ? (
+                            breakfast.map((item) => (
+                                <div key={item.id} className='bg-white shadow-md rounded-md p-5 relative'>
+                                    <img src={`https://zivato-foods.onrender.com/${item.file}`} alt="" className='w-full h-40 object-cover mb-3' />
+                                    <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
+                                    <div className="flex justify-between items-center mb-2">
+                                        <h3 className="text-red-500 font-semibold text-lg">Kshs. {item.price}</h3>
+                                        <div className='flex flex-row items-center justify-between'>
+                                            <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateBreakfast(item.id) }}>update</button>
+
+                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded `} onClick={() => { handleDeleteBreakfast(item.id) }}>Delete</button>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-sm">{item.description}</p>
+                                </div >
+                            ))
+                        ) : (
+                            <div>
+                                <Lottie
+                                    options={{
+                                        loop: true,
+                                        autoplay: true,
+                                        animationData: loading1,
+                                        rendererSettings: {
+                                            preserveAspectRatio: "xMidYMid slice",
+                                        },
+                                    }}
+                                    width={100}
+                                    height={100}
+                                />
+                            </div>
+                        )
+                        }
+                    </div >
+                </div >
+                {/* Lunch Food */}
+                < div className="m-10" >
+                    <h1 className="text-3xl font-bold mb-5">Lunch Food</h1>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {lunch.length > 0 ? (
+                            lunch.map((item) => (
+                                <div key={item.id} className='bg-white shadow-md rounded-md p-5 relative'>
+                                    <img src={`https://zivato-foods.onrender.com/${item.file}`} alt="" className='w-full h-40 object-cover mb-3' />
+                                    <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
+                                    <div className="flex justify-between items-center mb-2">
+                                        <h3 className="text-red-500 font-semibold text-lg">Kshs. {item.price}</h3>
+                                        <div className='flex flex-row items-center justify-between'>
+                                            <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateLunch(item.id) }}>update</button>
+
+                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded `} onClick={() => { handleDeleteLunch(item.id) }}>Delete</button>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-sm">{item.description}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <div>
+                                <Lottie
+                                    options={{
+                                        loop: true,
+                                        autoplay: true,
+                                        animationData: loading1,
+                                        rendererSettings: {
+                                            preserveAspectRatio: "xMidYMid slice",
+                                        },
+                                    }}
+                                    width={100}
+                                    height={100}
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div >
+                {/* Supper Orders */}
+                < div className="m-10" >
+                    <h1 className="text-3xl font-bold mb-5">Supper Orders</h1>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                        {supper.length > 0 ? (
+                            supper.map((item) => (
+                                <div key={item.id} className='bg-white shadow-md rounded-md p-5 relative'>
+                                    <img src={`https://zivato-foods.onrender.com/${item.file}`} alt="" className='w-full h-40 object-cover mb-3' />
+                                    <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
+                                    <div className="flex justify-between items-center mb-2">
+                                        <h3 className="text-red-500 font-semibold text-lg">Kshs. {item.price}</h3>
+                                        <div className='flex flex-row items-center justify-between'>
+                                            <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateSupper(item.id) }}>update</button>
+
+                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded `} onClick={() => { handleDeleteSupper(item.id) }}>Delete</button>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-sm">{item.description}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <div>
+                                <Lottie
+                                    options={{
+                                        loop: true,
+                                        autoplay: true,
+                                        animationData: loading1,
+                                        rendererSettings: {
+                                            preserveAspectRatio: "xMidYMid slice",
+                                        },
+                                    }}
+                                    width={100}
+                                    height={100}
+                                />
+                            </div>
+                        )}
+                    </div>
+                </div >
+            </div >
+        </div >
+    );
+}
+
+export default Items;
