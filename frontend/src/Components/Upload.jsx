@@ -15,9 +15,10 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
 import { NavLink } from 'react-router-dom';
+import { useStore } from 'zustand';
 import { formStore } from './store';
 function Upload() {
-    const { file, name, description, price, password, setFile, setName, setDescription, setPrice, setPassword } = formStore;
+    const { file, name, description, price, password, setFile, setName, setDescription, setPrice, setPassword } = useStore(formStore);
     const [showPassword, setShowPassword] = useState(false);
     const [view, setView] = useState(false)
     const [circularProgress, setCircularProgress] = useState(false)
