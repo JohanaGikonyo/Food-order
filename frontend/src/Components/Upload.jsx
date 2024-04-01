@@ -148,8 +148,8 @@ function Upload() {
     }
 
     return (
-        <div className="flex justify-center items-center h-full">
-            <div className='lg:flex items-center justify-around align-middle bg-gray-100 min-h-screen relative block'>
+        <div className="flex justify-center items-center h-full bg-gray-100">
+            <div className='lg:flex items-center justify-around align-middle  min-h-screen relative block'>
                 {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
                         <CircularProgress color="secondary" />
@@ -196,9 +196,7 @@ function Upload() {
                             type="submit"
 
                         >
-                            {circularProgress ? <Box sx={{ display: 'flex' }} >
-                                <CircularProgress className='h-1 w-1 text-orange-400' />
-                            </Box> : ""}  Submit
+                            Submit
                         </button></form>
                 ) : null}
                 {view ?
