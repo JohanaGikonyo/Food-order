@@ -15,6 +15,19 @@ export const selectedItemsStore = create((set) => ({
         count: state.selected.length + 1
     }))
 }))
+export const formStore = create((set) => ({
+    file: null,
+    name: '',
+    description: '',
+    price: '',
+    password: '',
+    setFile: (file) => set({ file }),
+    setName: (name) => set({ name }),
+    setDescription: (description) => set({ description }),
+    setPrice: (price) => set({ price }),
+    setPassword: (password) => set({ password })
+}));
+
 
 
 

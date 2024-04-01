@@ -15,12 +15,9 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
 import { NavLink } from 'react-router-dom';
+import { formStore } from './store';
 function Upload() {
-    const [file, setFile] = useState(null)
-    const [name, setName] = useState()
-    const [description, setDescription] = useState()
-    const [price, setPrice] = useState()
-    const [password, setPassword] = useState()
+    const { file, name, description, price, password, setFile, setName, setDescription, setPrice, setPassword } = formStore;
     const [showPassword, setShowPassword] = useState(false);
     const [view, setView] = useState(false)
     const [circularProgress, setCircularProgress] = useState(false)
@@ -219,7 +216,7 @@ function Upload() {
                                 <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
                                     <div>
                                         <label htmlFor="">Upload Image</label>
-                                        <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} />
+                                        <input type="file" value={file} onChange={(e) => { setFile(e.target.files[0]) }} />
                                     </div>
                                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                                         <OutlinedInput
@@ -228,7 +225,9 @@ function Upload() {
                                             inputProps={{
                                                 'aria-label': 'weight',
                                             }}
+                                            value={name}
                                             onChange={(e) => { setName(e.target.value) }}
+
                                         />
                                         <FormHelperText id="outlined-weight-helper-text">Product Name</FormHelperText>
                                     </FormControl>
@@ -240,7 +239,9 @@ function Upload() {
                                             inputProps={{
                                                 'aria-label': 'weight',
                                             }}
+                                            value={price}
                                             onChange={(e) => { setPrice(e.target.value) }}
+
                                         />
                                         <FormHelperText id="outlined-weight-helper-text">Price/cost</FormHelperText>
                                     </FormControl>
@@ -251,7 +252,9 @@ function Upload() {
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">Text:</InputAdornment>,
                                         }}
+                                        value={description}
                                         onChange={(e) => { setDescription(e.target.value) }}
+
                                     />
                                     <button
                                         className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
@@ -272,7 +275,7 @@ function Upload() {
                                 <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
                                     <div>
                                         <label htmlFor="">Upload Image</label>
-                                        <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} />
+                                        <input type="file" value={file} onChange={(e) => { setFile(e.target.files[0]) }} />
                                     </div>
                                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                                         <OutlinedInput
@@ -281,7 +284,9 @@ function Upload() {
                                             inputProps={{
                                                 'aria-label': 'weight',
                                             }}
+                                            value={name}
                                             onChange={(e) => { setName(e.target.value) }}
+
                                         />
                                         <FormHelperText id="outlined-weight-helper-text">Product Name</FormHelperText>
                                     </FormControl>
@@ -293,7 +298,9 @@ function Upload() {
                                             inputProps={{
                                                 'aria-label': 'weight',
                                             }}
+                                            value={price}
                                             onChange={(e) => { setPrice(e.target.value) }}
+
                                         />
                                         <FormHelperText id="outlined-weight-helper-text">Price/cost</FormHelperText>
                                     </FormControl>
@@ -304,7 +311,9 @@ function Upload() {
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">Text:</InputAdornment>,
                                         }}
+                                        value={description}
                                         onChange={(e) => { setDescription(e.target.value) }}
+
                                     />
                                     <button
                                         className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
@@ -324,7 +333,7 @@ function Upload() {
                                 <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
                                     <div>
                                         <label htmlFor="">Upload Image</label>
-                                        <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} />
+                                        <input type="file" value={file} onChange={(e) => { setFile(e.target.files[0]) }} />
                                     </div>
                                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                                         <OutlinedInput
@@ -333,7 +342,9 @@ function Upload() {
                                             inputProps={{
                                                 'aria-label': 'weight',
                                             }}
+                                            value={name}
                                             onChange={(e) => { setName(e.target.value) }}
+
                                         />
                                         <FormHelperText id="outlined-weight-helper-text">Product Name</FormHelperText>
                                     </FormControl>
@@ -345,6 +356,7 @@ function Upload() {
                                             inputProps={{
                                                 'aria-label': 'weight',
                                             }}
+                                            value={price}
                                             onChange={(e) => { setPrice(e.target.value) }}
                                         />
                                         <FormHelperText id="outlined-weight-helper-text">Price/cost</FormHelperText>
@@ -356,6 +368,7 @@ function Upload() {
                                         InputProps={{
                                             startAdornment: <InputAdornment position="start">Text:</InputAdornment>,
                                         }}
+                                        value={description}
                                         onChange={(e) => { setDescription(e.target.value) }}
                                     />
                                     <button
@@ -374,7 +387,7 @@ function Upload() {
                     </div>
                 ) : null
                 }
-                <div><NavLink to="/items">View Items</NavLink></div>
+                <div className='border-t-2 border-orange-400'><NavLink to="/items"><span><button>View Items</button></span></NavLink></div>
             </div >
         </div >
     );
