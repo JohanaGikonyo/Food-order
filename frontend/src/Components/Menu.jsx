@@ -5,7 +5,7 @@ import Lottie from "react-lottie";
 import { countStore, selectedItemsStore } from './store';
 import Rating from '@mui/material/Rating';
 import Navbar from './Navigate/Navbar';
-// import Typography from '@mui/material/Typography';
+
 function Menu() {
     const [breakfast, setBreakfast] = useState([]);
     const [lunch, setLunch] = useState([]);
@@ -14,6 +14,7 @@ function Menu() {
     const { increment } = countStore();
     const { select, selected } = selectedItemsStore();
     const [itemRatings, setItemRatings] = useState({});
+
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -142,14 +143,12 @@ function Menu() {
                                             <button className={`bg-orange-400 text-white py-1 px-3 rounded ${isItemClicked(item.id) ? 'hidden' : ''}`} onClick={() => { handleCount(); handleItemClicked(item.id); selectedItem(item) }}>Add To Cart</button>
                                         )}
                                     </div>
-                                    <div className='flex flex-row justify-between items-center'>
-                                        <Rating
-                                            name={`rating-${item.id}`} // Unique name for each rating component
-                                            value={itemRatings[item.id] || 4} // Use stored rating or default to 0
-                                            onChange={(event, newValue) => handleRatingChange(newValue, item.id)} // Pass item id to handleRatingChange
-                                        />
-                                        <p className="text-sm">{item.description}</p>
-                                    </div>
+                                    <Rating
+                                        name={`rating-${item.id}`} // Unique name for each rating component
+                                        value={itemRatings[item.id] || 4} // Use stored rating or default to 0
+                                        onChange={(event, newValue) => handleRatingChange(newValue, item.id)} // Pass item id to handleRatingChange
+                                    />
+                                    <p className="text-sm">{item.description}</p>
                                 </div>
                             ))
                         ) : (
@@ -187,14 +186,12 @@ function Menu() {
                                             <button className={`bg-orange-400 text-white py-1 px-3 rounded ${isItemClicked(item.id) ? 'hidden' : ''}`} onClick={() => { handleCount(); handleItemClicked(item.id); selectedItem(item) }}>Add To Cart</button>
                                         )}
                                     </div>
-                                    <div className='flex flex-row justify-between items-center'>
-                                        <Rating
-                                            name={`rating-${item.id}`} // Unique name for each rating component
-                                            value={itemRatings[item.id] || 3} // Use stored rating or default to 0
-                                            onChange={(event, newValue) => handleRatingChange(newValue, item.id)} // Pass item id to handleRatingChange
-                                        />
-                                        <p className="text-sm">{item.description}</p>
-                                    </div>
+                                    <Rating
+                                        name={`rating-${item.id}`} // Unique name for each rating component
+                                        value={itemRatings[item.id] || 3} // Use stored rating or default to 0
+                                        onChange={(event, newValue) => handleRatingChange(newValue, item.id)} // Pass item id to handleRatingChange
+                                    />
+                                    <p className="text-sm">{item.description}</p>
                                 </div>
                             ))
                         ) : (
@@ -215,7 +212,8 @@ function Menu() {
                         )}
                     </div>
                 </div>
-            </ div></div>
+            </div>
+        </div>
     );
 }
 
