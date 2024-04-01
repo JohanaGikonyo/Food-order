@@ -16,7 +16,10 @@ function Items() {
     const [supper, setSupper] = useState([]);
     const [successAlert, setSuccessAlert] = useState(false)
     const [errorAlert, setErrorAlert] = useState(false)
-    const [circularProgress, setCircularProgress] = useState(false)
+
+    const [breakfastLoading, setBreakfastLoading] = useState(false);
+    const [lunchLoading, setLunchLoading] = useState(false);
+    const [supperLoading, setSupperLoading] = useState(false);
     const history = useNavigate()
     useEffect(() => {
         window.scrollTo({
@@ -59,21 +62,23 @@ function Items() {
 
     const handleDeleteBreakfast = async (id) => {
         try {
-            setCircularProgress(true)
+            setBreakfastLoading(true);
             const response = await axios.post(`https://zivato-foods.onrender.com/api/deletebreakfast/${id}`);
             if (response.data === "deleted") {
-                history('/items')
+                history('/menu')
                 setSuccessAlert(true)
-                setCircularProgress(false)
+
             }
             else {
                 setErrorAlert(true)
-                setCircularProgress(false)
+
             }
 
         } catch (error) {
             console.error('An error occurred', error);
             setErrorAlert(true)
+        } finally {
+            setBreakfastLoading(false);
         }
 
     }
@@ -94,19 +99,21 @@ function Items() {
     }
     const handleDeleteLunch = async (id) => {
         try {
-            setCircularProgress(true)
+            setLunchLoading(false);
             const response = await axios.post(`https://zivato-foods.onrender.com/api/deletelunch/${id}`);
             if (response.data === "deleted") {
-                setCircularProgress(false)
                 setSuccessAlert(true)
+                history('/menu')
             }
             else {
                 setErrorAlert(true)
-                setCircularProgress(false)
+
             }
         } catch (error) {
             console.error('An error occurred', error);
-            setCircularProgress(false)
+
+        } finally {
+            setLunchLoading(false);
         }
 
     }
@@ -114,7 +121,7 @@ function Items() {
         try {
             const response = await axios.post(`https://zivato-foods.onrender.com/api/updatelunch/${id}`);
             if (response.data === "updated") {
-                history('/items')
+                history('/menu')
                 setSuccessAlert(true)
             }
             else {
@@ -127,19 +134,21 @@ function Items() {
     }
     const handleDeleteSupper = async (id) => {
         try {
-            setCircularProgress(true)
+            setSupperLoading(true)
             const response = await axios.post(`https://zivato-foods.onrender.com/api/deletesupper/${id}`);
             if (response.data === "deleted") {
-                // history('/items')
+                history('/menu')
                 setSuccessAlert(true)
-                setCircularProgress(false)
+
             }
             else {
                 setErrorAlert(true)
-                setCircularProgress(false)
+
             }
         } catch (error) {
             console.error('An error occurred', error);
+        } finally {
+            setLunchLoading(false);
         }
 
     }
@@ -166,7 +175,7 @@ function Items() {
 
             <div className='flex flex-col justify-around p-5 relative' >
                 {/* Success and Error Alerts */}
-                <div className="absolute top-[35%] z-40">
+                <div className="absolute top-[35%] z-40 h-40 w-[100%]">
                     <Stack sx={{ width: '100%', height: '20px' }} spacing={2}>
                         {errorAlert && (
                             <Alert variant="filled" severity="error" onClose={() => setErrorAlert(false)}>
@@ -195,7 +204,7 @@ function Items() {
                                         <div className='flex flex-row items-center justify-between'>
                                             <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateBreakfast(item.id) }}>update</button>
 
-                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteSupper(item.id) }}> {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteBreakfast(item.id) }}> {breakfastLoading ? <Box sx={{ display: 'flex' }} >
                                                 <CircularProgress className='h-1 w-1 text-orange-400' />
                                             </Box> : ""}  Delete</button></div>
                                     </div>
@@ -235,7 +244,7 @@ function Items() {
                                         <h3 className="text-red-500 font-semibold text-lg">Kshs. {item.price}</h3>
                                         <div className='flex flex-row items-center justify-between'>
                                             <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateLunch(item.id) }}>update</button>
-                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteSupper(item.id) }}> {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteLunch(item.id) }}> {lunchLoading ? <Box sx={{ display: 'flex' }} >
                                                 <CircularProgress className='h-1 w-1 text-orange-400' />
                                             </Box> : ""}  Delete</button></div>
                                     </div>
@@ -275,7 +284,7 @@ function Items() {
                                         <div className='flex flex-row items-center justify-between'>
                                             <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateSupper(item.id) }}>update</button>
 
-                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteSupper(item.id) }}> {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded flex flex-row`} onClick={() => { handleDeleteSupper(item.id) }}> {supperLoading ? <Box sx={{ display: 'flex' }} >
                                                 <CircularProgress className='h-1 w-1 text-orange-400' />
                                             </Box> : ""}  Delete</button>
                                         </div>
