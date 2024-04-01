@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './Components/Home'
 import SignIn from './Components/Authorization/SignIn'
 import Login from './Components/Authorization/Login'
+import Footer from './Components/Footer'
 function App() {
 
 
@@ -25,6 +26,7 @@ function App() {
 
 
       </Routes>
+      <Footer />
 
     </>
   )
