@@ -4,9 +4,11 @@ import loading1 from './Assets/loading1.json';
 import Lottie from "react-lottie";
 // import { countStore, selectedItemsStore } from './store';
 import Navbar from './Navigate/Navbar';
+import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom'
 function Items() {
     const [breakfast, setBreakfast] = useState([]);
@@ -14,6 +16,7 @@ function Items() {
     const [supper, setSupper] = useState([]);
     const [successAlert, setSuccessAlert] = useState(false)
     const [errorAlert, setErrorAlert] = useState(false)
+    const [circularProgress, setCircularProgress] = useState(false)
     const history = useNavigate()
     useEffect(() => {
         window.scrollTo({
@@ -56,13 +59,16 @@ function Items() {
 
     const handleDeleteBreakfast = async (id) => {
         try {
+            setCircularProgress(true)
             const response = await axios.post(`https://zivato-foods.onrender.com/api/deletebreakfast/${id}`);
             if (response.data === "deleted") {
                 history('/items')
                 setSuccessAlert(true)
+                setCircularProgress(false)
             }
             else {
                 setErrorAlert(true)
+                setCircularProgress(false)
             }
 
         } catch (error) {
@@ -88,16 +94,19 @@ function Items() {
     }
     const handleDeleteLunch = async (id) => {
         try {
+            setCircularProgress(true)
             const response = await axios.post(`https://zivato-foods.onrender.com/api/deletelunch/${id}`);
             if (response.data === "deleted") {
-                history('/items')
+                setCircularProgress(false)
                 setSuccessAlert(true)
             }
             else {
                 setErrorAlert(true)
+                setCircularProgress(false)
             }
         } catch (error) {
             console.error('An error occurred', error);
+            setCircularProgress(false)
         }
 
     }
@@ -118,13 +127,16 @@ function Items() {
     }
     const handleDeleteSupper = async (id) => {
         try {
+            setCircularProgress(true)
             const response = await axios.post(`https://zivato-foods.onrender.com/api/deletesupper/${id}`);
             if (response.data === "deleted") {
-                history('/items')
+                // history('/items')
                 setSuccessAlert(true)
+                setCircularProgress(false)
             }
             else {
                 setErrorAlert(true)
+                setCircularProgress(false)
             }
         } catch (error) {
             console.error('An error occurred', error);
@@ -153,17 +165,21 @@ function Items() {
             <Navbar />
 
             <div className='flex flex-col justify-around p-5 relative' >
-                <div className="absolute  top-[35%]  z-40 ">
-                    <Stack sx={{ width: '100% ', height: '20px' }} spacing={2}>
-                        {errorAlert ? <Alert variant="filled" severity="error" onClose={() => { setErrorAlert(prev => !prev); history('/items') }}>
-                            <AlertTitle>Error</AlertTitle>
-                            Either Email or Password is wrong.
-                        </Alert> : ""}
-                        {successAlert ? <Alert variant="filled" severity="success" onClose={() => { setSuccessAlert(prev => !prev), history('/items') }}>
-                            <AlertTitle>Success</AlertTitle>
-                            Welcome!
-                        </Alert> : ""}
-
+                {/* Success and Error Alerts */}
+                <div className="absolute top-[35%] z-40">
+                    <Stack sx={{ width: '100%', height: '20px' }} spacing={2}>
+                        {errorAlert && (
+                            <Alert variant="filled" severity="error" onClose={() => setErrorAlert(false)}>
+                                <AlertTitle>Error</AlertTitle>
+                                There was an error.
+                            </Alert>
+                        )}
+                        {successAlert && (
+                            <Alert variant="filled" severity="success" onClose={() => setSuccessAlert(false)}>
+                                <AlertTitle>Success</AlertTitle>
+                                Operation successful.
+                            </Alert>
+                        )}
                     </Stack>
                 </div>
                 <div className='m-10'>
@@ -258,7 +274,9 @@ function Items() {
                                         <div className='flex flex-row items-center justify-between'>
                                             <button className="bg-orange-400 text-white py-1 px-3 rounded" onClick={() => { handleUpdateSupper(item.id) }}>update</button>
 
-                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded `} onClick={() => { handleDeleteSupper(item.id) }}>Delete</button>
+                                            <button className={`bg-blue-400 text-white py-1 px-3 rounded `} onClick={() => { handleDeleteSupper(item.id) }}> {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                                <CircularProgress className='h-1 w-1 text-orange-400' />
+                                            </Box> : ""}  Delete</button>
                                         </div>
                                     </div>
 
