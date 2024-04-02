@@ -11,11 +11,14 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
 import { NavLink } from 'react-router-dom';
-import { formStore } from './store';
-import { useStore } from 'zustand';
+// import { formStore } from './store';
+// import { useStore } from 'zustand';
 function Update() {
-    const { file, name, description, price, setFile, setName, setDescription, setPrice, setPassword } = useStore(formStore)
-
+    const [file, setFile] = useState(null)
+    const [name, setName] = useState()
+    const [description, setDescription] = useState()
+    const [price, setPrice] = useState()
+    const [password, setPassword] = useState()
     const [view, setView] = useState(true)
     const [circularProgress, setCircularProgress] = useState(false)
     const [successAlert, setSuccessAlert] = useState(false)
@@ -136,6 +139,7 @@ function Update() {
                 {view ?
                     <select
                         className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ] sm:mt-5"
+                        value={password}
                         onChange={(e) => setFoodCategory(e.target.value)}
                     >
                         <option value="">Choose Category</option>

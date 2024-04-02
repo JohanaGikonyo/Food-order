@@ -10,9 +10,12 @@ import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useNavigate } from 'react-router-dom'
-import { formStore } from './store';
+// import { formStore } from './store';
 function Items() {
-    const { setFile, setName, setDescription, setPrice } = formStore;
+    const [file, setFile] = useState(null)
+    const [name, setName] = useState()
+    const [description, setDescription] = useState()
+    const [price, setPrice] = useState()
     const [breakfast, setBreakfast] = useState([]);
     const [lunch, setLunch] = useState([]);
     const [supper, setSupper] = useState([]);
