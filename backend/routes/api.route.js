@@ -1,21 +1,13 @@
 const express = require('express');
 const bcrypt = require('bcrypt')
-const cors = require('cors');
+
 const path = require('path')
 const { PrismaClient } = require('@prisma/client');
 const upload = require('./upload');
 
 const router = express.Router();
 
-const corsOptions = {
-  origin: [
-    'https://food-order-app-sand.vercel.app', 'http://localhost:5173'],
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-  optionSuccessStatus: 200
-};
-
-router.use(cors(corsOptions)); // Apply CORS middleware to all routes
+// Apply CORS middleware to all routes
 
 const prisma = new PrismaClient();
 

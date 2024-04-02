@@ -2,6 +2,7 @@ const express = require('express');
 const createError = require('http-errors');
 const morgan = require('morgan');
 const path = require('path')
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
@@ -11,7 +12,14 @@ app.use(morgan('dev'));
 
 // app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')))
+const corsOptions = {
+  origin: 'https://food-order-app-sand.vercel.app',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionSuccessStatus: 200
+};
 
+app.use(cors(corsOptions));
 app.get('/', async (req, res, next) => {
   res.send({ message: 'Awesome it works 🐻' });
 });
