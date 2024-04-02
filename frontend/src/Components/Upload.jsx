@@ -148,9 +148,7 @@ function Upload() {
             setCircularProgress(false)
         }
     }
-    // useEffect(() => {
-    //     setFile(null), setName(''), setDescription(''), setPrice()
-    // }, [])
+
 
     return (
         <div className="flex justify-center items-center h-full bg-gray-100 ">
