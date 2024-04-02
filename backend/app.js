@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 
 // app.use(express.static('public'));
-express.static(path.join(__dirname, 'public'))
+app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', async (req, res, next) => {
   res.send({ message: 'Awesome it works 🐻' });
