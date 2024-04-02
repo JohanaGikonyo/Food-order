@@ -14,7 +14,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 // // import { useStore } from 'zustand';
 // import { formStore } from './store';
 function Upload() {
@@ -30,6 +30,7 @@ function Upload() {
     const [errorAlert, setErrorAlert] = useState(false)
     const [foodCategory, setFoodCategory] = useState('')
     const [isLoading, setIsLoading] = useState(false);
+    const history = useNavigate()
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event) => {
@@ -164,7 +165,7 @@ function Upload() {
                             <AlertTitle>Error</AlertTitle>
                             Ooops! Something went wrong!
                         </Alert> : ""}
-                        {successAlert ? <Alert variant="filled" severity="success" onClose={() => { setSuccessAlert(prev => !prev), setView(true) }}>
+                        {successAlert ? <Alert variant="filled" severity="success" onClose={() => { setSuccessAlert(prev => !prev), setView(true), history('/items') }}>
                             <AlertTitle>Success</AlertTitle>
                             Successful. Thank You!
                         </Alert> : ""}
