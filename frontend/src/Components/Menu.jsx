@@ -90,7 +90,7 @@ function Menu() {
                         {breakfast.length > 0 ? (
                             breakfast.map((item) => (
                                 <div key={item.id} className='bg-white shadow-md rounded-md p-5 relative'>
-                                    <img src={`https://zivato-foods.onrender.com/${item.file}`} alt="" className='w-full h-40 object-cover mb-3' />
+                                    <img src={`https://zivato-foods.onrender.com/api/${item.file}`} alt="" className='w-full h-40 object-cover mb-3' />
                                     <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
                                     <div className="flex justify-between items-center mb-2">
                                         <h3 className="text-red-500 font-semibold text-lg">Kshs. {item.price}</h3>
