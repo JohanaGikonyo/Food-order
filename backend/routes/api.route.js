@@ -216,7 +216,7 @@ router.post('/deletesupper/:id', async (req, res, next) => {
 router.patch('/updatebreakfast/:id', async (req, res, next) => {
   const id = parseInt(req.params.id);
   const { name, price, description } = req.body;
-  const filename = req.file.filename // Check if req.file exists
+  const filename = req.file ? req.file.filename : null; // Check if req.file exists
   try {
     const updated = await prisma.food.update({
       where: { id: id }, data: {
@@ -237,7 +237,7 @@ router.patch('/updatebreakfast/:id', async (req, res, next) => {
 router.patch('/updatelunch/:id', async (req, res, next) => {
   const id = parseInt(req.params.id);
   const { name, price, description } = req.body;
-  const filename = req.file.filename // Check if req.file exists
+  const filename = req.file ? req.file.filename : null; // Check if req.file exists
 
   try {
     const updatedLunch = await prisma.lunch.update({
@@ -260,10 +260,11 @@ router.patch('/updatelunch/:id', async (req, res, next) => {
 router.patch('/updatesupper/:id', async (req, res, next) => {
   const id = parseInt(req.params.id);
   const { name, price, description } = req.body;
-  const filename = req.file.filename  // Check if req.file exists
+  const filename = req.file ? req.file.filename : null;  // Check if req.file exists
   try {
     const updated = await prisma.super.update({
-      where: { id: id }, data: {
+      where: { id: id },
+      data: {
         name: name,
         price: price,
         description: description,
