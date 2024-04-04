@@ -13,7 +13,7 @@ app.use(morgan('dev'));
 // app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')))
 const corsOptions = {
-  origin: ['https://food-order-app-sand.vercel.app', 'http://localhost:5173'],
+  origin: ['https://food-order-app-sand.vercel.app'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionSuccessStatus: 200
