@@ -401,7 +401,7 @@ function Items() {
 
 
             {viewUpdateForm ?
-                <div className="flex justify-center flex-col items-center gap-3 bg-gray-100  ">
+                <div>
 
 
 
