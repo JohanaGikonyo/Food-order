@@ -402,27 +402,25 @@ function Items() {
 
             {viewUpdateForm ?
                 <div>
-                    <div className="flex flex-col lg:flex-row items-center justify-around gap-3">
-                        <div className="lg:flex items-center justify-around align-middle min-h-screen">
-                            {isLoading && (
-                                <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-                                    { }
-                                </div>
-                            )}
-
-
-
-                            <select
-                                className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-5"
-                                onChange={(e) => setFoodCategory(e.target.value)}
-                            >
-                                <option value="">Choose Category</option>
-                                <option value="breakfast">Breakfast</option>
-                                <option value="lunch">Lunch</option>
-                                <option value="supper">Dinner</option>
-                            </select>
-
+                    {isLoading && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
+                            { }
                         </div>
+                    )}
+                    <div className="flex flex-col  items-center justify-around gap-3">
+
+
+                        <select
+                            className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-5"
+                            onChange={(e) => setFoodCategory(e.target.value)}
+                        >
+                            <option value="">Choose Category</option>
+                            <option value="breakfast">Breakfast</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="supper">Dinner</option>
+                        </select>
+
+
                         {foodCategory === "breakfast" || foodCategory === "" ? <form action="" onSubmit={handleBreakfast} className='flex flex-col gap-10 justify-between items-center m-10'>
                             <h1 className='border-b-2 border-red-500'>BreakFast Food</h1>
                             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
