@@ -140,14 +140,14 @@ function Items() {
 
     }
 
-    const handleUpdate = (item) => {
+    const handleUpdate = (items) => {
         // history('/update');
         setViewUpdateForm(prev => !prev);
-        setIdToUpdate(item.id);
-        setFile(item.file);
-        setName(item.name);
-        setPrice(item.price);
-        setDescription(item.description);
+        setIdToUpdate(items.id);
+        // setFile(item.file);
+        setName(items.name);
+        setPrice(items.price);
+        setDescription(items.description);
         alert("Hi")
 
     }
@@ -161,7 +161,7 @@ function Items() {
         setIsLoading(true)
         try {
             const formData = new FormData();
-            formData.append('file', e.target.files[0]);
+            formData.append('file', file);
             formData.append('name', name);
             formData.append('description', description);
             formData.append('price', price);
@@ -192,7 +192,7 @@ function Items() {
 
         try {
             const formData = new FormData();
-            formData.append('file', e.target.files[0]);
+            formData.append('file', file);
             formData.append('name', name);
             formData.append('description', description);
             formData.append('price', price);
@@ -222,7 +222,7 @@ function Items() {
         setIsLoading(true)
         try {
             const formData = new FormData();
-            formData.append('file', e.target.files[0]);
+            formData.append('file', file);
             formData.append('name', name);
             formData.append('description', description);
             formData.append('price', price);
@@ -444,7 +444,7 @@ function Items() {
                                 <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
                                     <div>
                                         <label htmlFor="">Upload Image</label>
-                                        <input type="file" value={file} onChange={(e) => { setFile(e.target.files[0]) }} />
+                                        <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} />
                                     </div>
                                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                                         <OutlinedInput
@@ -503,7 +503,7 @@ function Items() {
                                 <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
                                     <div>
                                         <label htmlFor="">Upload Image</label>
-                                        <input type="file" value={file} onChange={(e) => { setFile(e.target.files[0]) }} />
+                                        <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} />
                                     </div>
                                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                                         <OutlinedInput
@@ -561,7 +561,7 @@ function Items() {
                                 <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
                                     <div>
                                         <label htmlFor="">Upload Image</label>
-                                        <input type="file" value={file} onChange={(e) => { setFile(e.target.files[0]) }} />
+                                        <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} />
                                     </div>
                                     <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
                                         <OutlinedInput
