@@ -159,7 +159,7 @@ function Items() {
         setIsLoading(true)
         try {
             const formData = new FormData();
-            formData.append('file', file);
+            formData.append('file', e.target.files[0]);
             formData.append('name', name);
             formData.append('description', description);
             formData.append('price', price);
@@ -190,7 +190,7 @@ function Items() {
 
         try {
             const formData = new FormData();
-            formData.append('file', file);
+            formData.append('file', e.target.files[0]);
             formData.append('name', name);
             formData.append('description', description);
             formData.append('price', price);
@@ -220,7 +220,7 @@ function Items() {
         setIsLoading(true)
         try {
             const formData = new FormData();
-            formData.append('file', file);
+            formData.append('file', e.target.files[0]);
             formData.append('name', name);
             formData.append('description', description);
             formData.append('price', price);
