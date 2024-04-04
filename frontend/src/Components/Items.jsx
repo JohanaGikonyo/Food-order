@@ -21,7 +21,7 @@ function Items() {
     const [description, setDescription] = useState()
     const [price, setPrice] = useState()
     const [idToUpdate, setIdToUpdate] = useState()
-    const [viewUpdate, setViewUpdate] = useState(false)
+    const [viewUpdateForm, setViewUpdateForm] = useState(false)
     const [breakfast, setBreakfast] = useState([]);
     const [lunch, setLunch] = useState([]);
     const [supper, setSupper] = useState([]);
@@ -147,7 +147,7 @@ function Items() {
         setName(item.name);
         setPrice(item.price);
         setDescription(item.description);
-        setViewUpdate(prev => !prev)
+        setViewUpdateForm(prev => !prev)
     }
 
 
@@ -267,7 +267,7 @@ function Items() {
                 </Stack>
             </div>
 
-            {!viewUpdate ?
+            {!viewUpdateForm ?
 
 
                 <div className='flex flex-col justify-around p-5 relative' >
