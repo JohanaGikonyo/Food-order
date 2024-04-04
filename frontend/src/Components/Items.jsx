@@ -402,7 +402,7 @@ function Items() {
 
             {viewUpdateForm ?
                 <div>
-                    <div className="flex flex-col items-center justify-around gap-3">
+                    <div className="flex flex-col lg:flex-row items-center justify-around gap-3">
                         <div className="lg:flex items-center justify-around align-middle min-h-screen">
                             {isLoading && (
                                 <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">

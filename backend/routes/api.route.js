@@ -214,7 +214,10 @@ router.post('/deletesupper/:id', async (req, res, next) => {
   }
 });
 router.patch('/updatebreakfast/:id', async (req, res, next) => {
+  const id = req.params.id
+
   try {
+    const updated = await prisma.food.updateMany({ where: { id: id } })
 
   } catch (error) {
     next(error)
