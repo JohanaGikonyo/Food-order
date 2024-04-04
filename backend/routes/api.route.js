@@ -223,7 +223,7 @@ router.patch('/updatebreakfast/:id', async (req, res, next) => {
         name: name,
         price: price,
         description: description,
-        ...(filename && { filename: filename })
+        ...(filename && { file: filename })
       }
     })
     res.json("updated")
