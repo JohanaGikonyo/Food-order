@@ -135,19 +135,20 @@ function Update() {
 
                     </Stack>
                 </div>
-
-                {view ?
-                    <select
-                        className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ] sm:mt-5"
-                        value={password}
-                        onChange={(e) => setFoodCategory(e.target.value)}
-                    >
-                        <option value="">Choose Category</option>
-                        <option value="breakfast">Breakfast</option>
-                        <option value="lunch">Lunch</option>
-                        <option value="supper">Dinner</option>
-                    </select>
-                    : ""}
+                <div>
+                    {view ?
+                        <select
+                            className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ] sm:mt-5"
+                            value={password}
+                            onChange={(e) => setFoodCategory(e.target.value)}
+                        >
+                            <option value="">Choose Category</option>
+                            <option value="breakfast">Breakfast</option>
+                            <option value="lunch">Lunch</option>
+                            <option value="supper">Dinner</option>
+                        </select>
+                        : ""}
+                </div>
 
                 {view ? (
                     <div>
