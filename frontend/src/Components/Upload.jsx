@@ -14,7 +14,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // // import { useStore } from 'zustand';
 // import { formStore } from './store';
 function Upload() {
@@ -30,7 +30,7 @@ function Upload() {
     const [errorAlert, setErrorAlert] = useState(false)
     const [foodCategory, setFoodCategory] = useState('')
     const [isLoading, setIsLoading] = useState(false);
-    const history = useNavigate()
+    // const history = useNavigate()
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
     const handleMouseDownPassword = (event) => {
@@ -46,7 +46,7 @@ function Upload() {
             if (response.data === "verified") {
                 setCircularProgress(false)
                 setSuccessAlert(true)
-                history('/items')
+
 
 
             }
@@ -110,7 +110,7 @@ function Upload() {
             if (response.data === "uploaded") {
                 setCircularProgress(false)
                 setSuccessAlert(true)
-                history('/items')
+
             }
             else {
                 setCircularProgress(false)
