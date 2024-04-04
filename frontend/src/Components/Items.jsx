@@ -52,7 +52,7 @@ function Items() {
 
         const Lunch = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/getlunch/');
+                const response = await axios.get('https://zivato-foods.onrender.com/api/getlunch/');
                 setLunch(response.data);
             } catch (error) {
                 console.error('An error occurred', error);
