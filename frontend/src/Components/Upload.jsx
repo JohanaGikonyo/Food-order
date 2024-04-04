@@ -109,6 +109,7 @@ function Upload() {
             if (response.data === "uploaded") {
                 setCircularProgress(false)
                 setSuccessAlert(true)
+                history('/items')
             }
             else {
                 setCircularProgress(false)
@@ -165,7 +166,7 @@ function Upload() {
                             <AlertTitle>Error</AlertTitle>
                             Ooops! Something went wrong!
                         </Alert> : ""}
-                        {successAlert ? <Alert variant="filled" severity="success" onClose={() => { setSuccessAlert(prev => !prev), setView(true), history('/items') }}>
+                        {successAlert ? <Alert variant="filled" severity="success" onClose={() => { setSuccessAlert(prev => !prev), setView(true) }}>
                             <AlertTitle>Success</AlertTitle>
                             Successful. Thank You!
                         </Alert> : ""}
