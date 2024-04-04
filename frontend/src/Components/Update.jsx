@@ -54,6 +54,8 @@ function Update() {
             console.error("An error occurred", error);
             setErrorAlert(true)
             setCircularProgress(false)
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -116,7 +118,7 @@ function Update() {
 
     return (
         <div className="flex justify-center flex-col items-center h-full bg-gray-100  ">
-            <div className='lg:flex items-center justify-around align-middle  min-h-screen relative block'>
+            <div className='lg:flex items-center justify-around align-middle  min-h-screen  block'>
                 {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
                         <CircularProgress color="secondary" />

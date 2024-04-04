@@ -112,7 +112,7 @@ function Navbar() {
                         {/* <NavLink to='/service' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Service</button></NavLink>*/}
                         <NavLink to='/signin' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]"><span><GroupAddOutlinedIcon /></span>SignIn</button></NavLink>
                         <NavLink to='/login' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[10px] bg-orange-500"><span><LoginOutlinedIcon /></span>LogIn</button></NavLink>
-                        <NavLink to="/upload" onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Upload</button></NavLink>
+                        <NavLink to="/upload" onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Admin</button></NavLink>
                     </div>
                 )
             }
