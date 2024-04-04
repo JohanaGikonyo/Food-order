@@ -142,12 +142,13 @@ function Items() {
 
     const handleUpdate = (item) => {
         // history('/update');
-        setViewUpdateForm(prev => { !prev });
+        setViewUpdateForm(prev => !prev);
         setIdToUpdate(item.id);
         setFile(item.file);
         setName(item.name);
         setPrice(item.price);
         setDescription(item.description);
+        alert("Hi")
 
     }
 
