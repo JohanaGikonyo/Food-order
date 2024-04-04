@@ -216,7 +216,7 @@ router.post('/deletesupper/:id', async (req, res, next) => {
 router.patch('/updatebreakfast/:id', async (req, res, next) => {
   const id = parseInt(req.params.id);
   const { name, price, description } = req.body;
-  const filename = req.file ? req.file.filename : null; // Check if req.file exists
+  const filename = req.file.filename;
   try {
     const updated = await prisma.food.update({
       where: { id: id }, data: {
