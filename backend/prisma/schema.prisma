@@ -17,7 +17,7 @@ datasource db {
 }
 
 model Food {
-  id          Int    @id @default(autoincrement())
+  id          Int    @id @unique @default(autoincrement())
   name        String // Name of the food item
   description String // Description of the food item
   price       Float // Price of the food item (use Float for decimal values)
@@ -25,7 +25,7 @@ model Food {
 }
 
 model Lunch {
-  id          Int    @id @default(autoincrement())
+  id          Int    @id @unique @default(autoincrement())
   name        String // Name of the food item
   description String // Description of the food item
   price       Float // Price of the food item (use Float for decimal values)
@@ -33,7 +33,7 @@ model Lunch {
 }
 
 model Super {
-  id          Int    @id @default(autoincrement())
+  id          Int    @id @unique @default(autoincrement())
   name        String // Name of the food item
   description String // Description of the food item
   price       Float // Price of the food item (use Float for decimal values)

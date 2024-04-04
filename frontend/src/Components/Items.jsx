@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom'
 // import { formStore } from './store';
 function Items() {
     const [file, setFile] = useState(null)
-    const [name, setName] = useState()
+    const [name, setName] = useState('')
     const [description, setDescription] = useState()
     const [price, setPrice] = useState()
     const [idToUpdate, setIdToUpdate] = useState()
@@ -144,7 +144,6 @@ function Items() {
         // history('/update');
         setViewUpdateForm(prev => !prev);
         setIdToUpdate(items.id);
-        // setFile(item.file);
         setName(items.name);
         setPrice(items.price);
         setDescription(items.description);
@@ -160,14 +159,12 @@ function Items() {
         e.preventDefault();
         setIsLoading(true)
         try {
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('name', name);
-            formData.append('description', description);
-            formData.append('price', price);
-            console.log(formData)
+
             setCircularProgress(true)
-            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatebreakfast/${idToUpdate}`, formData);
+            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatebreakfast/${idToUpdate}`, {
+                file, name, price
+                , description
+            });
             console.log(response.data);
             if (response.data === "updated") {
                 setCircularProgress(false)
@@ -191,15 +188,15 @@ function Items() {
         setIsLoading(true)
 
         try {
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('name', name);
-            formData.append('description', description);
-            formData.append('price', price);
-            console.log(formData)
+
             setCircularProgress(true)
-            const response = await axios.patch(`http://localhost:3000/api/updatelunch/${idToUpdate}`, formData);
+
+            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatelunch/${idToUpdate}`, {
+                file, name, price
+                , description
+            });
             console.log(response.data);
+
             if (response.data === "updated") {
                 setCircularProgress(false)
                 setSuccessAlert(true)
@@ -221,14 +218,13 @@ function Items() {
         e.preventDefault();
         setIsLoading(true)
         try {
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('name', name);
-            formData.append('description', description);
-            formData.append('price', price);
-            console.log(formData)
+
+
             setCircularProgress(true)
-            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatesuper/${idToUpdate}`, formData);
+            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatesuper/${idToUpdate}`, {
+                file, name, price
+                , description
+            });
             console.log(response.data);
 
             if (response.data === "updated") {
@@ -421,63 +417,64 @@ function Items() {
                         </select>
 
 
-                        {foodCategory === "breakfast" || foodCategory === "" ? <form action="" onSubmit={handleBreakfast} className='flex flex-col gap-10 justify-between items-center m-10'>
-                            <h1 className='border-b-2 border-red-500'>BreakFast Food</h1>
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                                <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
-                                    <div>
-                                        <label htmlFor="">Upload Image</label>
-                                        <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} />
-                                    </div>
-                                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                                        <OutlinedInput
-                                            id="outlined-adornment-weight"
-                                            aria-describedby="outlined-weight-helper-text"
-                                            inputProps={{
-                                                'aria-label': 'weight',
+                        {foodCategory === "breakfast" || foodCategory === "" ?
+                            <form action="" onSubmit={handleBreakfast} className='flex flex-col gap-10 justify-between items-center m-10'>
+                                <h1 className='border-b-2 border-red-500'>BreakFast Food</h1>
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                                    <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
+                                        <div>
+                                            <label htmlFor="">Upload Image</label>
+                                            <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} />
+                                        </div>
+                                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                                            <OutlinedInput
+                                                id="outlined-adornment-weight"
+                                                aria-describedby="outlined-weight-helper-text"
+                                                inputProps={{
+                                                    'aria-label': 'weight',
+                                                }}
+                                                value={name}
+                                                onChange={(e) => { setName(e.target.value) }}
+
+                                            />
+                                            <FormHelperText id="outlined-weight-helper-text">Product Name</FormHelperText>
+                                        </FormControl>
+                                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                                            <OutlinedInput
+                                                id="outlined-adornment-weight"
+                                                endAdornment={<InputAdornment position="end">ksh.</InputAdornment>}
+                                                aria-describedby="outlined-weight-helper-text"
+                                                inputProps={{
+                                                    'aria-label': 'weight',
+                                                }}
+                                                value={price}
+                                                onChange={(e) => { setPrice(e.target.value) }}
+
+                                            />
+                                            <FormHelperText id="outlined-weight-helper-text">Price/cost</FormHelperText>
+                                        </FormControl>
+                                        <TextField
+                                            label="About the product"
+                                            id="outlined-start-adornment"
+                                            sx={{ m: 1, width: '25ch' }}
+                                            InputProps={{
+                                                startAdornment: <InputAdornment position="start">Text:</InputAdornment>,
                                             }}
-                                            value={name}
-                                            onChange={(e) => { setName(e.target.value) }}
+                                            value={description}
+                                            onChange={(e) => { setDescription(e.target.value) }}
 
                                         />
-                                        <FormHelperText id="outlined-weight-helper-text">Product Name</FormHelperText>
-                                    </FormControl>
-                                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                                        <OutlinedInput
-                                            id="outlined-adornment-weight"
-                                            endAdornment={<InputAdornment position="end">ksh.</InputAdornment>}
-                                            aria-describedby="outlined-weight-helper-text"
-                                            inputProps={{
-                                                'aria-label': 'weight',
-                                            }}
-                                            value={price}
-                                            onChange={(e) => { setPrice(e.target.value) }}
+                                        <button
+                                            className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
+                                            type="submit"
 
-                                        />
-                                        <FormHelperText id="outlined-weight-helper-text">Price/cost</FormHelperText>
-                                    </FormControl>
-                                    <TextField
-                                        label="About the product"
-                                        id="outlined-start-adornment"
-                                        sx={{ m: 1, width: '25ch' }}
-                                        InputProps={{
-                                            startAdornment: <InputAdornment position="start">Text:</InputAdornment>,
-                                        }}
-                                        value={description}
-                                        onChange={(e) => { setDescription(e.target.value) }}
-
-                                    />
-                                    <button
-                                        className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
-                                        type="submit"
-
-                                    >
-                                        {circularProgress ? <Box sx={{ display: 'flex' }} >
-                                            <CircularProgress className='h-1 w-1 text-orange-400' />
-                                        </Box> : ""}  Submit
-                                    </button></div>
-                            </Box>
-                        </form> : ""}
+                                        >
+                                            {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                                <CircularProgress className='h-1 w-1 text-orange-400' />
+                                            </Box> : ""}  Submit
+                                        </button></div>
+                                </Box>
+                            </form> : ""}
 
 
                         {foodCategory === "lunch" ? <form action="" onSubmit={handleLunch} className='flex flex-col gap-10 justify-between items-center m-10'>
