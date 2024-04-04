@@ -234,25 +234,27 @@ router.patch('/updatebreakfast/:id', async (req, res, next) => {
   }
 })
 router.patch('/updatelunch/:id', async (req, res, next) => {
-  const id = req.params.id
+  const id = req.params.id;
   const { name, price, description } = req.body;
   const filename = req.file ? req.file.filename : null; // Check if req.file exists
+
   try {
-    const updated = await prisma.lunch.update({
-      where: { id: id }, data: {
+    const updatedLunch = await prisma.lunch.update({
+      where: { id: id },
+      data: {
         name: name,
         price: price,
         description: description,
         ...(filename && { filename: filename })
       }
-    })
-    res.json("updated")
-
+    });
+    res.json("updated");
   } catch (error) {
-    next(error)
-
+    console.error('Error updating lunch item:', error);
+    next(error);
   }
-})
+});
+
 router.patch('/updatesupper/:id', async (req, res, next) => {
   const id = req.params.id
   const { name, price, description } = req.body;

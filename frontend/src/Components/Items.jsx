@@ -167,7 +167,7 @@ function Items() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatebreakfast${idToUpdate}`, formData);
+            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatebreakfast/${idToUpdate}`, formData);
             console.log(response.data);
             if (response.data === "updated") {
                 setCircularProgress(false)
@@ -198,7 +198,7 @@ function Items() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatelunch${idToUpdate}`, formData);
+            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatelunch/${idToUpdate}`, formData);
             console.log(response.data);
             if (response.data === "updated") {
                 setCircularProgress(false)
@@ -228,7 +228,7 @@ function Items() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatesuper${idToUpdate}`, formData);
+            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatesuper/${idToUpdate}`, formData);
             console.log(response.data);
 
             if (response.data === "updated") {
