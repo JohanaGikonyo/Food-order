@@ -401,27 +401,14 @@ function Items() {
 
 
             {viewUpdateForm ?
-                <div className="flex justify-center flex-col items-center h-full bg-gray-100  ">
+                <div className="flex justify-center flex-col items-center gap-3 bg-gray-100  ">
                     <div className='lg:flex items-center justify-around align-middle  min-h-screen  block'>
                         {isLoading && (
                             <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
                                 { }
                             </div>
                         )}
-                        {/* <div className="absolute  top-[35%]  z-40 ">
-                            <Stack sx={{ width: '100% ', height: '20px' }} spacing={2}>
-                                {errorAlert ? <Alert variant="filled" severity="error" onClose={() => { setErrorAlert(prev => !prev); setCircularProgress(false); setPassword("") }}>
-                                    <AlertTitle>Error</AlertTitle>
-                                    Ooops! Something went wrong!
-                                </Alert> : ""}
-                                {successAlert ? <Alert variant="filled" severity="success" onClose={() => { setSuccessAlert(prev => !prev), setView(true) }}>
-                                    <AlertTitle>Success</AlertTitle>
-                                    Successful. Thank You!
-                                </Alert> : ""}
 
-                            </Stack>
-                        </div>
-                        <div> */}
 
                         <select
                             className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ] sm:mt-5"
@@ -615,10 +602,11 @@ function Items() {
                     </div>
 
 
-                    <div className='border-t-2 bg-orange-400 text-white p-1 rounded '><NavLink to="/items"><span><button>View Items</button></span></NavLink></div>
+                    <div className='border-t-2 bg-orange-400 text-white p-1 rounded ' onClick={() => { setViewUpdateForm(prev => !prev) }}><span><button>View Items</button></span></div>
                 </div>
 
-                : " "}
+                : " "
+            }
 
 
         </div >
