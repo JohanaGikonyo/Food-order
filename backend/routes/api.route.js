@@ -213,6 +213,30 @@ router.post('/deletesupper/:id', async (req, res, next) => {
     next(error);
   }
 });
+router.patch('/updatebreakfast/:id', async (req, res, next) => {
+  try {
+
+  } catch (error) {
+    next(error)
+
+  }
+})
+router.patch('/updatelunch/:id', async (req, res, next) => {
+  try {
+
+  } catch (error) {
+    next(error)
+
+  }
+})
+router.patch('/updatesupper/:id', async (req, res, next) => {
+  try {
+
+  } catch (error) {
+    next(error)
+
+  }
+})
 
 
 module.exports = router;

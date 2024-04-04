@@ -102,7 +102,7 @@ function Update() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.patch('https://zivato-foods.onrender.com/api/updatesuper', formData);
+            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatesuper`, formData);
             console.log(response.data);
 
             if (response.data === "uploaded") {
