@@ -52,7 +52,7 @@ function Items() {
 
         const Lunch = async () => {
             try {
-                const response = await axios.get('https://zivato-foods.onrender.com/api/getlunch/');
+                const response = await axios.get('http://localhost:3000/api/getlunch/');
                 setLunch(response.data);
             } catch (error) {
                 console.error('An error occurred', error);
@@ -198,7 +198,7 @@ function Items() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatelunch/${idToUpdate}`, formData);
+            const response = await axios.patch(`http://localhost:3000/api/updatelunch/${idToUpdate}`, formData);
             console.log(response.data);
             if (response.data === "updated") {
                 setCircularProgress(false)
