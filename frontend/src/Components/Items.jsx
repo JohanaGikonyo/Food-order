@@ -411,9 +411,9 @@ function Items() {
                             )}
 
 
-                            <select
-                                className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ] sm:mt-5"
 
+                            <select
+                                className="block w-[50%] p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mt-5"
                                 onChange={(e) => setFoodCategory(e.target.value)}
                             >
                                 <option value="">Choose Category</option>
