@@ -148,7 +148,7 @@ function Items() {
         setName(items.name);
         setPrice(items.price);
         setDescription(items.description);
-        alert("Hi")
+
 
     }
 
@@ -402,11 +402,8 @@ function Items() {
 
             {viewUpdateForm ?
                 <div>
-
-
-
-                    <div className=' flex flex-col items-center gap-3 justify-around'>
-                        <div className='lg:flex items-center justify-around align-middle  min-h-screen  block'>
+                    <div className="flex flex-col items-center justify-around gap-3">
+                        <div className="lg:flex items-center justify-around align-middle min-h-screen">
                             {isLoading && (
                                 <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
                                     { }
@@ -543,61 +540,62 @@ function Items() {
                             </Box>
                         </form> : ""}
 
-                        {foodCategory === "supper" ? <form action="" onSubmit={handleSupper} className='flex flex-col gap-10 justify-between items-center m-10'>
-                            <h1 className='border-b-2 border-red-500'>Supper Food</h1>
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
-                                <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
-                                    <div>
-                                        <label htmlFor="">Upload Image</label>
-                                        <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} />
-                                    </div>
-                                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                                        <OutlinedInput
-                                            id="outlined-adornment-weight"
-                                            aria-describedby="outlined-weight-helper-text"
-                                            inputProps={{
-                                                'aria-label': 'weight',
-                                            }}
-                                            value={name}
-                                            onChange={(e) => { setName(e.target.value) }}
+                        {foodCategory === "supper" ?
+                            <form action="" onSubmit={handleSupper} className='flex flex-col gap-10 justify-between items-center m-10'>
+                                <h1 className='border-b-2 border-red-500'>Supper Food</h1>
+                                <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
+                                    <div className='bg-white p-5 rounded w-auto flex flex-col items-center'>
+                                        <div>
+                                            <label htmlFor="">Upload Image</label>
+                                            <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} />
+                                        </div>
+                                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                                            <OutlinedInput
+                                                id="outlined-adornment-weight"
+                                                aria-describedby="outlined-weight-helper-text"
+                                                inputProps={{
+                                                    'aria-label': 'weight',
+                                                }}
+                                                value={name}
+                                                onChange={(e) => { setName(e.target.value) }}
 
-                                        />
-                                        <FormHelperText id="outlined-weight-helper-text">Product Name</FormHelperText>
-                                    </FormControl>
-                                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                                        <OutlinedInput
-                                            id="outlined-adornment-weight"
-                                            endAdornment={<InputAdornment position="end">ksh.</InputAdornment>}
-                                            aria-describedby="outlined-weight-helper-text"
-                                            inputProps={{
-                                                'aria-label': 'weight',
+                                            />
+                                            <FormHelperText id="outlined-weight-helper-text">Product Name</FormHelperText>
+                                        </FormControl>
+                                        <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
+                                            <OutlinedInput
+                                                id="outlined-adornment-weight"
+                                                endAdornment={<InputAdornment position="end">ksh.</InputAdornment>}
+                                                aria-describedby="outlined-weight-helper-text"
+                                                inputProps={{
+                                                    'aria-label': 'weight',
+                                                }}
+                                                value={price}
+                                                onChange={(e) => { setPrice(e.target.value) }}
+                                            />
+                                            <FormHelperText id="outlined-weight-helper-text">Price/cost</FormHelperText>
+                                        </FormControl>
+                                        <TextField
+                                            label="About the product"
+                                            id="outlined-start-adornment"
+                                            sx={{ m: 1, width: '25ch' }}
+                                            InputProps={{
+                                                startAdornment: <InputAdornment position="start">Text:</InputAdornment>,
                                             }}
-                                            value={price}
-                                            onChange={(e) => { setPrice(e.target.value) }}
+                                            value={description}
+                                            onChange={(e) => { setDescription(e.target.value) }}
                                         />
-                                        <FormHelperText id="outlined-weight-helper-text">Price/cost</FormHelperText>
-                                    </FormControl>
-                                    <TextField
-                                        label="About the product"
-                                        id="outlined-start-adornment"
-                                        sx={{ m: 1, width: '25ch' }}
-                                        InputProps={{
-                                            startAdornment: <InputAdornment position="start">Text:</InputAdornment>,
-                                        }}
-                                        value={description}
-                                        onChange={(e) => { setDescription(e.target.value) }}
-                                    />
-                                    <button
-                                        className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
-                                        type="submit"
+                                        <button
+                                            className="bg-slate-200   hover:text-blue-500 text-orange-400 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  text-xl flex flex-row gap-5 items-center justify-between"
+                                            type="submit"
 
-                                    >
-                                        {circularProgress ? <Box sx={{ display: 'flex' }} >
-                                            <CircularProgress className='h-1 w-1 text-orange-400' />
-                                        </Box> : ""}  Submit
-                                    </button></div>
-                            </Box>
-                        </form> : ""}
+                                        >
+                                            {circularProgress ? <Box sx={{ display: 'flex' }} >
+                                                <CircularProgress className='h-1 w-1 text-orange-400' />
+                                            </Box> : ""}  Submit
+                                        </button></div>
+                                </Box>
+                            </form> : ""}
 
 
                     </div>
