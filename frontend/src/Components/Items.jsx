@@ -397,9 +397,10 @@ function Items() {
                 </div >
 
 
-                :
+                : ""}
 
 
+            {viewUpdateForm ?
                 <div className="flex justify-center flex-col items-center h-full bg-gray-100  ">
                     <div className='lg:flex items-center justify-around align-middle  min-h-screen  block'>
                         {isLoading && (
@@ -615,9 +616,9 @@ function Items() {
 
 
                     <div className='border-t-2 bg-orange-400 text-white p-1 rounded '><NavLink to="/items"><span><button>View Items</button></span></NavLink></div>
-                </div >
+                </div>
 
-            }
+                : " "}
 
 
         </div >
