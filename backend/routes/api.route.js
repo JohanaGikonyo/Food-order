@@ -248,6 +248,7 @@ router.patch('/updatelunch/:id', async (req, res, next) => {
         ...(filename && { filename: filename })
       }
     });
+    console.log(updatedLunch)
     res.json("updated");
   } catch (error) {
     console.error('Error updating lunch item:', error);
