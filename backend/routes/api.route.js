@@ -214,7 +214,7 @@ router.post('/deletesupper/:id', async (req, res, next) => {
   }
 });
 router.patch('/updatebreakfast/:id', async (req, res, next) => {
-  const id = req.params.id
+  const id = parseInt(req.params.id);
   const { name, price, description } = req.body;
   const filename = req.file ? req.file.filename : null; // Check if req.file exists
   try {
@@ -234,7 +234,7 @@ router.patch('/updatebreakfast/:id', async (req, res, next) => {
   }
 })
 router.patch('/updatelunch/:id', async (req, res, next) => {
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
   const { name, price, description } = req.body;
   const filename = req.file ? req.file.filename : null; // Check if req.file exists
 
@@ -256,7 +256,7 @@ router.patch('/updatelunch/:id', async (req, res, next) => {
 });
 
 router.patch('/updatesupper/:id', async (req, res, next) => {
-  const id = req.params.id
+  const id = parseInt(req.params.id);
   const { name, price, description } = req.body;
   const filename = req.file ? req.file.filename : null; // Check if req.file exists
   try {
