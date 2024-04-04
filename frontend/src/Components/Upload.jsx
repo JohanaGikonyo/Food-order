@@ -46,6 +46,7 @@ function Upload() {
             if (response.data === "verified") {
                 setCircularProgress(false)
                 setSuccessAlert(true)
+                history('/items')
 
 
             }
