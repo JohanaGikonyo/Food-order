@@ -32,6 +32,7 @@ function Update() {
 
     const handleBreakfast = async (e) => {
         e.preventDefault();
+        setIsLoading(true)
         try {
             const formData = new FormData();
             formData.append('file', file);
@@ -40,7 +41,7 @@ function Update() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.patch('https://zivato-foods.onrender.com/api/uploadbreakfast', formData);
+            const response = await axios.patch('https://zivato-foods.onrender.com/api/updatebreakfast', formData);
             console.log(response.data);
             if (response.data === "uploaded") {
                 setCircularProgress(false)
@@ -61,6 +62,7 @@ function Update() {
 
     const handleLunch = async (e) => {
         e.preventDefault();
+        setIsLoading(true)
 
         try {
             const formData = new FormData();
@@ -70,7 +72,7 @@ function Update() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.patch('https://zivato-foods.onrender.com/api/uploadlunch', formData);
+            const response = await axios.patch('https://zivato-foods.onrender.com/api/updatelunch', formData);
             console.log(response.data);
             if (response.data === "uploaded") {
                 setCircularProgress(false)
@@ -84,12 +86,14 @@ function Update() {
             console.error("An error occurred", error);
             setErrorAlert(true)
             setCircularProgress(false)
+        } finally {
+            setIsLoading(false)
         }
     }
 
     const handleSupper = async (e) => {
         e.preventDefault();
-
+        setIsLoading(true)
         try {
             const formData = new FormData();
             formData.append('file', file);
@@ -98,7 +102,7 @@ function Update() {
             formData.append('price', price);
             console.log(formData)
             setCircularProgress(true)
-            const response = await axios.patch('https://zivato-foods.onrender.com/api/uploadsuper', formData);
+            const response = await axios.patch('https://zivato-foods.onrender.com/api/updatesuper', formData);
             console.log(response.data);
 
             if (response.data === "uploaded") {
@@ -113,6 +117,8 @@ function Update() {
             console.error("An error occurred", error);
             setErrorAlert(true)
             setCircularProgress(false)
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -121,7 +127,7 @@ function Update() {
             <div className='lg:flex items-center justify-around align-middle  min-h-screen  block'>
                 {isLoading && (
                     <div className="absolute inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-                        <CircularProgress color="secondary" />
+                        { }
                     </div>
                 )}
                 <div className="absolute  top-[35%]  z-40 ">
