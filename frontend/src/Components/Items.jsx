@@ -601,8 +601,9 @@ function Items() {
                     </div>
 
 
-                    <div className='border-t-2 bg-orange-400 text-white p-1 rounded ' onClick={() => { setViewUpdateForm(prev => !prev) }}><span><button>View Items</button></span></div>
-                </div>
+                    <div className="border-t-2 bg-orange-400 text-white p-1 rounded cursor-pointer" onClick={() => { setViewUpdateForm(prev => !prev) }}>
+                        <button>View Items</button>
+                    </div> </div>
 
                 : " "
             }
