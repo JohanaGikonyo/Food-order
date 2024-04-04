@@ -42,7 +42,7 @@ function Home() {
                             {/* onClick event now passes image source */}
 
                             <a href="#" className="group" onClick={(e) => handleClick(e, img2)}>
-                                <img src={img2} alt="Image 2" className="w-full h-auto group-hover:opacity-50" />
+                                <img src={img2} alt="Image 2" className="w-full h-auto group-hover:opacity-50 rounded" />
                             </a>
                         </div>
                         <h1 className="text-4xl font-bold ml-4 text-orange-400">Ziva<span className="text-black">to</span></h1>

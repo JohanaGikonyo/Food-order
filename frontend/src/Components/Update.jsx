@@ -328,7 +328,7 @@ function Update() {
                     </div>
                 ) : null
                 }
-                <div className='border-t-2 border-orange-400'><NavLink to="/items"><span><button>View Items</button></span></NavLink></div>
+                <div className='border-t-2 bg-orange-400 text-white p-1 rounded '><NavLink to="/items"><span><button>View Items</button></span></NavLink></div>
             </div >
         </div >
     );
