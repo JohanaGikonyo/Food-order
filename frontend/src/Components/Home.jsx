@@ -190,7 +190,7 @@ function Home() {
                         <img src={modalImageSrc} alt="Modal Image" className="max-h-full max-w-full" />
                     </div>
                 )}
-                <img src={img1} alt="Food" className="w-[400px] h-[400px] rounded-lg shadow-md object-cover" />
+                <img src={img1} alt="Foods" className="w-[400px] h-[400px] rounded-lg shadow-md object-cover" />
             </div>
         </div >
     );
