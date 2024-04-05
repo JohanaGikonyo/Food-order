@@ -221,7 +221,7 @@ function Items() {
 
 
             setCircularProgress(true)
-            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatesuper/${idToUpdate}`, {
+            const response = await axios.patch(`https://zivato-foods.onrender.com/api/updatesupper/${idToUpdate}`, {
                 file, name, price
                 , description
             });
