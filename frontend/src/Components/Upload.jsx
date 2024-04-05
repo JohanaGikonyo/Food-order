@@ -393,7 +393,7 @@ function Upload() {
                             </Box>
                         </form> : ""}
 
-                        <div className='border-t-2 border-orange-400'><NavLink to="/items"><span><button>View Items</button></span></NavLink></div>
+                        <div className='border-2 border-orange-400'><NavLink to="/items"><span><button>View Items</button></span></NavLink></div>
                     </div>
                 ) : null
                 }
