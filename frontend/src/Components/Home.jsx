@@ -178,7 +178,7 @@ function Home() {
                     </div>
                 </div>
                 <div className='underline border-b-2 border-orange-400 w-[100%]'>
-                    <h1 ><NavLink to="/menu"><button>Get Started</button></NavLink></h1>
+                    <h1 ><NavLink to="/menu"><button className='border border-orange-400 m-2 p-1'>Get Started</button></NavLink></h1>
                 </div>
             </div >
 
