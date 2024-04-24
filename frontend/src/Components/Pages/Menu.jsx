@@ -14,15 +14,14 @@ function Menu() {
     const { increment } = countStore();
     const { select, selected } = selectedItemsStore();
     const [itemRatings, setItemRatings] = useState({});
-    const allItemsStore = AllItems()
+    const allItemsStore = AllItems();
     const { setAllItems } = allItemsStore;
 
     useEffect(() => {
-        const fetchItems = async (url, setState, setAllItems) => {
+        const fetchItems = async (url, setState) => {
             try {
                 const response = await axios.get(url);
                 setState(response.data);
-                console.log(response.data)
                 setAllItems(prevItems => [...prevItems, ...response.data]);
             } catch (error) {
                 console.error('An error occurred', error);
@@ -30,15 +29,15 @@ function Menu() {
         };
 
         const Lunch = async () => {
-            await fetchItems('https://zivato-foods.onrender.com/api/getlunch/', setLunch, setAllItems);
+            await fetchItems('https://zivato-foods.onrender.com/api/getlunch/', setLunch);
         };
 
         const Super = async () => {
-            await fetchItems('https://zivato-foods.onrender.com/api/getsupper/', setSupper, setAllItems);
+            await fetchItems('https://zivato-foods.onrender.com/api/getsupper/', setSupper);
         };
 
         const fetchAllItems = async () => {
-            await fetchItems('https://zivato-foods.onrender.com/api/getbreakfast/', setBreakfast, setAllItems);
+            await fetchItems('https://zivato-foods.onrender.com/api/getbreakfast/', setBreakfast);
             await Super();
             await Lunch();
         };
