@@ -6,12 +6,10 @@ import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import Autocomplete from '@mui/material/Autocomplete';
 import Stack from '@mui/material/Stack';
-
 import TextField from '@mui/material/TextField';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { countStore } from "../Pages/store";
-import { AllItems } from "../Pages/store";
+import { countStore, AllItems } from "../Pages/store";
 
 function Navbar() {
     const { count } = countStore();
@@ -46,8 +44,6 @@ function Navbar() {
                     {/* <NavLink to='/service'><button className="flex items-center gap-2 p-2 rounded-[15px]">Service</button></NavLink> */}
                 </div>
                 <div className="flex items-center gap-5">
-
-
                     <Stack spacing={2} sx={{ width: 300 }}>
                         <Autocomplete
                             freeSolo
@@ -69,32 +65,32 @@ function Navbar() {
                             )}
                         />
                     </Stack>
-
-
-                    <NavLink to="/cart"><button className="flex items-center gap-2 p-2 rounded-[15px] relative"><ShoppingCartOutlinedIcon /><button className="absolute top-0 right-0 m-0.5 bg-orange-400 rounded-[100%] p-0.5">{count}</button></button></NavLink>
+                    <NavLink to="/cart">
+                        <button className="flex items-center gap-2 p-2 rounded-[15px] relative">
+                            <ShoppingCartOutlinedIcon />
+                            <button className="absolute top-0 right-0 m-0.5 bg-orange-400 rounded-[100%] p-0.5">{count}</button>
+                        </button>
+                    </NavLink>
                 </div>
                 <div className="hidden lg:flex lg:justify-between gap-5 items-center">
                     <NavLink to='/signin' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]"><span><GroupAddOutlinedIcon /></span>SignIn</button></NavLink>
                     <NavLink to='/login' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[10px] bg-orange-500"><span><LoginOutlinedIcon /></span>LogIn</button></NavLink>
                     <NavLink to="/upload" onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Admin</button></NavLink>
-
                 </div>
                 <div className="flex items-center gap-5">
                     <button onClick={handleMenuToggle} className="sm:hidden flex items-center gap-2 p-2 rounded-[15px] transition-transform transform hover:scale-110">{menuOpen ? <CloseIcon /> : <MenuIcon />}</button>
                 </div>
             </div>
-            {
-                menuOpen && (
-                    <div ref={menuRef} className="sm:hidden flex flex-col items-center justify-center gap-5 bg-gray-200 p-5 absolute top-[70px] right-0 left-0 z-50 transition-transform transform scale-110">
-                        <NavLink to='/' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]  border-b-2 w-[100%]">Home</button></NavLink>
-                        <NavLink to='/menu' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Menu</button></NavLink>
-                        {/* <NavLink to='/service' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Service</button></NavLink>*/}
-                        <NavLink to='/signin' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]"><span><GroupAddOutlinedIcon /></span>SignIn</button></NavLink>
-                        <NavLink to='/login' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[10px] bg-orange-500"><span><LoginOutlinedIcon /></span>LogIn</button></NavLink>
-                        <NavLink to="/upload" onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Admin</button></NavLink>
-                    </div>
-                )
-            }
+            {menuOpen && (
+                <div ref={menuRef} className="sm:hidden flex flex-col items-center justify-center gap-5 bg-gray-200 p-5 absolute top-[70px] right-0 left-0 z-50 transition-transform transform scale-110">
+                    <NavLink to='/' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]  border-b-2 w-[100%]">Home</button></NavLink>
+                    <NavLink to='/menu' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Menu</button></NavLink>
+                    {/* <NavLink to='/service' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Service</button></NavLink> */}
+                    <NavLink to='/signin' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]"><span><GroupAddOutlinedIcon /></span>SignIn</button></NavLink>
+                    <NavLink to='/login' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[10px] bg-orange-500"><span><LoginOutlinedIcon /></span>LogIn</button></NavLink>
+                    <NavLink to="/upload" onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]">Admin</button></NavLink>
+                </div>
+            )}
         </div >
     );
 }
