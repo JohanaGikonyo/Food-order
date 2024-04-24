@@ -53,11 +53,10 @@ function Navbar() {
                             freeSolo
                             id="free-solo-2-demo"
                             disableClearable
-                            options={allItems.map((item) => {
-                                (
-                                    <div id={item.id}> <h2 className="text-xl font-semibold mb-2">{item.name}</h2></div>
-                                )
-                            })}
+                            options={allItems.map((item) => ({
+                                label: item.name,
+                                id: item.id
+                            }))}
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
