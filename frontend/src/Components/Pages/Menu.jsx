@@ -20,11 +20,7 @@ function Menu() {
 
 
     useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
-        const fetchItems = async (url, setState) => {
+        const fetchItems = async (url, setState, setAllItems) => {
             try {
                 const response = await axios.get(url);
                 setState(response.data);
@@ -35,16 +31,25 @@ function Menu() {
         };
 
         const Lunch = async () => {
-            fetchItems('https://zivato-foods.onrender.com/api/getlunch/', setLunch);
+            await fetchItems('https://zivato-foods.onrender.com/api/getlunch/', setLunch, setAllItems);
         };
 
         const Super = async () => {
-            fetchItems('https://zivato-foods.onrender.com/api/getsupper/', setSupper);
+            await fetchItems('https://zivato-foods.onrender.com/api/getsupper/', setSupper, setAllItems);
         };
 
-        fetchItems('https://zivato-foods.onrender.com/api/getbreakfast/', setBreakfast);
-        Super();
-        Lunch();
+        const fetchAllItems = async () => {
+            await fetchItems('https://zivato-foods.onrender.com/api/getbreakfast/', setBreakfast, setAllItems);
+            await Super();
+            await Lunch();
+        };
+
+        fetchAllItems();
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     }, [setAllItems]);
 
     const handleCount = () => {
