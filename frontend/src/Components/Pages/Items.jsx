@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import axios from 'redaxios';
-import loading1 from './Assets/loading1.json';
+import loading1 from '../Assets/loading1.json';
 import Lottie from "react-lottie";
 import FormHelperText from '@mui/material/FormHelperText';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
-import Navbar from './Navigate/Navbar';
+import Navbar from '../Navigate/Navbar';
 import Box from '@mui/material/Box';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';

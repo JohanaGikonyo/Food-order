@@ -22,6 +22,11 @@ function Home() {
         setAnchorEl(event.currentTarget);
         setModalImageSrc(imageSrc);
     };
+    const handleClickImage = (event, imageSrcs) => {
+        event.stopPropagation(); // Stop the propagation of the click event
+        // setAnchorEl(event.currentTarget);
+        setModalImageSrc(imageSrcs);
+    };
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -41,7 +46,7 @@ function Home() {
                         <div id="gallery" className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             {/* onClick event now passes image source */}
 
-                            <a href="#" className="group" onClick={(e) => handleClick(e, img2)}>
+                            <a href="#" className="group" onClick={(e) => handleClickImage(e, img2)}>
                                 <img src={img2} alt="Image 2" className="w-full h-auto group-hover:opacity-50 rounded" />
                             </a>
                         </div>

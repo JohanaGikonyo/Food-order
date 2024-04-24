@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import axios from 'redaxios';
-import loading1 from './Assets/loading1.json';
+import loading1 from '../Assets/loading1.json';
 import Lottie from "react-lottie";
-import { countStore, selectedItemsStore } from './store';
+import { countStore, selectedItemsStore, AllItems } from './store';
 import Rating from '@mui/material/Rating';
-import Navbar from './Navigate/Navbar';
+import Navbar from '../Navigate/Navbar';
 
 function Menu() {
     const [breakfast, setBreakfast] = useState([]);
@@ -14,6 +14,8 @@ function Menu() {
     const { increment } = countStore();
     const { select, selected } = selectedItemsStore();
     const [itemRatings, setItemRatings] = useState({});
+    const allItemsStore = AllItems()
+    const { setAllItems } = allItemsStore;
 
     useEffect(() => {
         window.scrollTo({
@@ -24,6 +26,7 @@ function Menu() {
             try {
                 const response = await axios.get('https://zivato-foods.onrender.com/api/getbreakfast/');
                 setBreakfast(response.data);
+                setAllItems(...response.data);
             } catch (error) {
                 console.error('An error occurred', error);
             }
@@ -33,6 +36,7 @@ function Menu() {
             try {
                 const response = await axios.get('https://zivato-foods.onrender.com/api/getlunch/');
                 setLunch(response.data);
+                setAllItems(...response);
             } catch (error) {
                 console.error('An error occurred', error);
             }
@@ -42,6 +46,7 @@ function Menu() {
             try {
                 const response = await axios.get('https://zivato-foods.onrender.com/api/getsupper/');
                 setSupper(response.data);
+                setAllItems(...response);
             } catch (error) {
                 console.error('An error occurred', error);
             }
@@ -50,7 +55,7 @@ function Menu() {
         Super();
         Lunch();
         fetchItems();
-    }, []);
+    }, [setAllItems]);
 
     const handleCount = () => {
         increment();

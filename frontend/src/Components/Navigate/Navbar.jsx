@@ -4,17 +4,20 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 // import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
+import Autocomplete from '@mui/material/Autocomplete';
+import Stack from '@mui/material/Stack';
+
+import TextField from '@mui/material/TextField';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import SearchIcon from '@mui/icons-material/Search';
-import { styled, alpha } from '@mui/material/styles';
-import InputBase from '@mui/material/InputBase';
-import { countStore } from "../store";
+import { countStore } from "../Pages/store";
+import { AllItems } from "../Pages/store";
 
 function Navbar() {
     const { count } = countStore();
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
+    const { allItems } = AllItems();
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -33,47 +36,6 @@ function Navbar() {
         setMenuOpen(prev => !prev);
     };
 
-    const Search = styled('div')(({ theme }) => ({
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: alpha(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: alpha(theme.palette.common.white, 0.25),
-        },
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(1),
-            width: 'auto',
-        },
-    }));
-
-    const SearchIconWrapper = styled('div')(({ theme }) => ({
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }));
-    const StyledInputBase = styled(InputBase)(({ theme }) => ({
-        color: 'inherit',
-        width: '100%',
-        '& .MuiInputBase-input': {
-            padding: theme.spacing(1, 1, 1, 0),
-            // vertical padding + font size from searchIcon
-            paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-            transition: theme.transitions.create('width'),
-            [theme.breakpoints.up('sm')]: {
-                width: '12ch',
-                '&:focus': {
-                    width: '20ch',
-                },
-            },
-        },
-    }));
-
     return (
         <div className="flex flex-row justify-between pb-5 pt-5 m-0 items-center sticky top-0 z-50 bg-white">
             <div className="text-orange-400 font-bold text-3xl">Ziva<span className="text-black">to</span></div>
@@ -84,15 +46,33 @@ function Navbar() {
                     {/* <NavLink to='/service'><button className="flex items-center gap-2 p-2 rounded-[15px]">Service</button></NavLink> */}
                 </div>
                 <div className="flex items-center gap-5">
-                    <Search>
-                        <SearchIconWrapper>
-                            <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
-                            placeholder="Search…"
-                            inputProps={{ 'aria-label': 'search' }}
+
+
+                    <Stack spacing={2} sx={{ width: 300 }}>
+                        <Autocomplete
+                            freeSolo
+                            id="free-solo-2-demo"
+                            disableClearable
+                            options={allItems.map((item) => {
+                                (
+                                    <div id={item.id}> <h2 className="text-xl font-semibold mb-2">{item.name}</h2></div>
+                                )
+                            })}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    label="Search Item"
+                                    InputProps={{
+                                        ...params.InputProps,
+                                        type: 'search',
+                                    }}
+                                />
+                            )}
                         />
-                    </Search><NavLink to="/cart"><button className="flex items-center gap-2 p-2 rounded-[15px] relative"><ShoppingCartOutlinedIcon /><button className="absolute top-0 right-0 m-0.5 bg-orange-400 rounded-[100%] p-0.5">{count}</button></button></NavLink>
+                    </Stack>
+
+
+                    <NavLink to="/cart"><button className="flex items-center gap-2 p-2 rounded-[15px] relative"><ShoppingCartOutlinedIcon /><button className="absolute top-0 right-0 m-0.5 bg-orange-400 rounded-[100%] p-0.5">{count}</button></button></NavLink>
                 </div>
                 <div className="hidden lg:flex lg:justify-between gap-5 items-center">
                     <NavLink to='/signin' onClick={() => setMenuOpen(false)}><button className="flex items-center gap-2 text-black border p-2 rounded-[15px]"><span><GroupAddOutlinedIcon /></span>SignIn</button></NavLink>

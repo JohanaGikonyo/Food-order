@@ -11,7 +11,7 @@ import Stack from '@mui/material/Stack';
 import AlertTitle from '@mui/material/AlertTitle';
 import Box from '@mui/material/Box';
 import { useState, useEffect } from "react";
-import Navbar from "./Navigate/Navbar";
+import Navbar from "../Navigate/Navbar";
 
 function Cart() {
     const { selected } = selectedItemsStore();

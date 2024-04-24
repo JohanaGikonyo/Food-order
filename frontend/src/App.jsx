@@ -1,15 +1,15 @@
 
 import './App.css'
-import Menu from './Components/Menu'
-import Upload from './Components/Upload'
+import Menu from './Components/Pages/Menu'
+import Upload from './Components/Pages/Upload'
 // import Navbar from './Components/Navigate/Navbar'
-import Cart from './Components/Cart'
+import Cart from './Components/Pages/Cart'
 import { Route, Routes } from 'react-router-dom'
-import Home from './Components/Home'
+import Home from './Components/Pages/Home'
 import SignIn from './Components/Authorization/SignIn'
 import Login from './Components/Authorization/Login'
-import Footer from './Components/Footer'
-import Items from './Components/Items'
+import Footer from './Components/Pages/Footer'
+import Items from './Components/Pages/Items'
 
 function App() {
 
