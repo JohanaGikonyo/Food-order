@@ -28,7 +28,7 @@ function Menu() {
             try {
                 const response = await axios.get(url);
                 setState(response.data);
-                setAllItems(response.data);
+                setAllItems(prevItems => [...prevItems, ...response.data]);
             } catch (error) {
                 console.error('An error occurred', error);
             }
