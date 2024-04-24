@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-// import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -15,7 +14,7 @@ function Navbar() {
     const { count } = countStore();
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
-    const { allItems } = AllItems();
+    const { allItems, setAllItems } = AllItems();
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -34,6 +33,22 @@ function Navbar() {
         setMenuOpen(prev => !prev);
     };
 
+    useEffect(() => {
+        function fetchData() {
+            async function fetchAllItems() {
+                try {
+                    const response = await fetch('https://zivato-foods.onrender.com/api/getbreakfast/');
+                    const data = await response.json();
+                    setAllItems(data);
+                } catch (error) {
+                    console.error('An error occurred', error);
+                }
+            }
+            fetchAllItems();
+        }
+        fetchData();
+    }, [setAllItems]);
+
     return (
         <div className="flex flex-row justify-between pb-5 pt-5 m-0 items-center sticky top-0 z-50 bg-white">
             <div className="text-orange-400 font-bold text-3xl">Ziva<span className="text-black">to</span></div>
@@ -49,10 +64,10 @@ function Navbar() {
                             freeSolo
                             id="free-solo-2-demo"
                             disableClearable
-                            options={allItems.map((item) => ({
+                            options={allItems ? allItems.map((item) => ({
                                 label: item.name,
                                 id: item.id
-                            }))}
+                            })) : []}
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
@@ -65,10 +80,10 @@ function Navbar() {
                             )}
                         />
                     </Stack>
-                    <NavLink to="/cart">
-                        <button className="flex items-center gap-2 p-2 rounded-[15px] relative">
+                    <NavLink to="/cart" className="relative">
+                        <button className="flex items-center gap-2 p-2 rounded-[15px]">
                             <ShoppingCartOutlinedIcon />
-                            <button className="absolute top-0 right-0 m-0.5 bg-orange-400 rounded-[100%] p-0.5">{count}</button>
+                            <span className="absolute top-0 right-0 m-0.5 bg-orange-400 rounded-[100%] p-0.5">{count}</span>
                         </button>
                     </NavLink>
                 </div>
