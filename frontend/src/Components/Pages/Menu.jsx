@@ -29,15 +29,15 @@ function Menu() {
         };
 
         const Lunch = async () => {
-            await fetchItems('http://localhost:3000/api/getlunch/', setLunch);
+            await fetchItems('https://zivato-foods.onrender.com/api/getlunch/', setLunch);
         };
 
         const Super = async () => {
-            await fetchItems('http://localhost:3000/api/getsupper/', setSupper);
+            await fetchItems('https://zivato-foods.onrender.com/api/getsupper/', setSupper);
         };
 
         const fetchAllItems = async () => {
-            await fetchItems('http://localhost:3000/api/getbreakfast/', setBreakfast);
+            await fetchItems('https://zivato-foods.onrender.com/api/getbreakfast/', setBreakfast);
             await Super();
             await Lunch();
         };
@@ -85,7 +85,7 @@ function Menu() {
                 {items.length > 0 ? (
                     items.map((item) => (
                         <div key={item.id} className='bg-white shadow-md rounded-md p-5 relative'>
-                            <img src={`http://localhost:3000/${item.file}`} alt="" className='w-full h-40 object-cover mb-3' />
+                            <img src={`https://zivato-foods.onrender.com/${item.file}`} alt="" className='w-full h-40 object-cover mb-3' />
                             <h2 className="text-xl font-semibold mb-2">{item.name}</h2>
                             <div className="flex justify-between items-center mb-2">
                                 <h3 className="text-red-500 font-semibold text-lg">Kshs. {item.price}</h3>

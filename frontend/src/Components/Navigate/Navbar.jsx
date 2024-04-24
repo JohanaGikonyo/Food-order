@@ -8,13 +8,13 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
-import { countStore, AllItems } from "../Pages/store";
+import { countStore } from "../Pages/store";
 
 function Navbar() {
     const { count } = countStore();
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
-    const { allItems, setAllItems } = AllItems();
+    // const { allItems } = AllItems();
 
     useEffect(() => {
         function handleClickOutside(event) {
@@ -33,21 +33,18 @@ function Navbar() {
         setMenuOpen(prev => !prev);
     };
 
-    useEffect(() => {
-        function fetchData() {
-            async function fetchAllItems() {
-                try {
-                    const response = await fetch('https://zivato-foods.onrender.com/api/getbreakfast/');
-                    const data = await response.json();
-                    setAllItems(data);
-                } catch (error) {
-                    console.error('An error occurred', error);
-                }
-            }
-            fetchAllItems();
-        }
-        fetchData();
-    }, [setAllItems]);
+    // useEffect(() => {
+    //     async function fetchData() {
+    //         try {
+    //             const response = await fetch('https://zivato-foods.onrender.com/api/getbreakfast/');
+    //             const data = await response.json();
+    //             setAllItems(data);
+    //         } catch (error) {
+    //             console.error('An error occurred', error);
+    //         }
+    //     }
+    //     fetchData();
+    // }, [setAllItems]);
 
     return (
         <div className="flex flex-row justify-between pb-5 pt-5 m-0 items-center sticky top-0 z-50 bg-white">
@@ -64,10 +61,10 @@ function Navbar() {
                             freeSolo
                             id="free-solo-2-demo"
                             disableClearable
-                            options={allItems ? allItems.map((item) => ({
-                                label: item.name,
-                                id: item.id
-                            })) : []}
+                            // options={allItems ? allItems.map((item) => ({
+                            //     label: item.name,
+                            //     id: item.id
+                            // })) : []}
                             renderInput={(params) => (
                                 <TextField
                                     {...params}
