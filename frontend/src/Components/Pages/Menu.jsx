@@ -17,13 +17,12 @@ function Menu() {
     const allItemsStore = AllItems()
     const { setAllItems } = allItemsStore;
 
-
-
     useEffect(() => {
         const fetchItems = async (url, setState, setAllItems) => {
             try {
                 const response = await axios.get(url);
                 setState(response.data);
+                console.log(response.data)
                 setAllItems(prevItems => [...prevItems, ...response.data]);
             } catch (error) {
                 console.error('An error occurred', error);
