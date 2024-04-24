@@ -17,33 +17,33 @@ function Menu() {
     const allItemsStore = AllItems()
     const { setAllItems } = allItemsStore;
 
+
+
+    const fetchItems = async (url, setState, setAllItems) => {
+        try {
+            const response = await axios.get(url);
+            setState(response.data);
+            setAllItems(prevItems => [...prevItems, ...response.data]);
+        } catch (error) {
+            console.error('An error occurred', error);
+        }
+    };
+
+
+
     useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        })
-        const fetchItems = async (url, setState) => {
-            try {
-                const response = await axios.get(url);
-                setState(response.data);
-                setAllItems(response.data);
-            } catch (error) {
-                console.error('An error occurred', error);
-            }
+        const Lunch = async (setLunch, setAllItems) => {
+            fetchItems('https://zivato-foods.onrender.com/api/getlunch/', setLunch, setAllItems);
         };
 
-        const Lunch = async () => {
-            fetchItems('https://zivato-foods.onrender.com/api/getlunch/', setLunch);
+        const Super = async (setSupper, setAllItems) => {
+            fetchItems('https://zivato-foods.onrender.com/api/getsupper/', setSupper, setAllItems);
         };
-
-        const Super = async () => {
-            fetchItems('https://zivato-foods.onrender.com/api/getsupper/', setSupper);
-        };
-
-        fetchItems('https://zivato-foods.onrender.com/api/getbreakfast/', setBreakfast);
-        Super();
-        Lunch();
+        fetchItems('https://zivato-foods.onrender.com/api/getbreakfast/', setBreakfast, setAllItems);
+        Super(setSupper, setAllItems);
+        Lunch(setLunch, setAllItems);
     }, [setAllItems]);
+
 
     const handleCount = () => {
         increment();
