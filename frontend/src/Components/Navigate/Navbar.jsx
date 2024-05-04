@@ -55,7 +55,7 @@ function Navbar() {
                     <NavLink to='/menu'><button className="flex items-center gap-2 p-2 rounded-[15px]">Menu</button></NavLink>
                     {/* <NavLink to='/service'><button className="flex items-center gap-2 p-2 rounded-[15px]">Service</button></NavLink> */}
                 </div>
-                <div className="flex items-center gap-5">
+                <div className="flex items-center ">
                     <Stack spacing={2} sx={{ width: 300 }}>
                         <Autocomplete
                             freeSolo
