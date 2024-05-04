@@ -3,9 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import GroupAddOutlinedIcon from '@mui/icons-material/GroupAddOutlined';
 import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
-import Autocomplete from '@mui/material/Autocomplete';
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
+// import Autocomplete from '@mui/material/Autocomplete';
+// import Stack from '@mui/material/Stack';
+// import TextField from '@mui/material/TextField';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { countStore } from "../Pages/store";
@@ -56,7 +56,7 @@ function Navbar() {
                     {/* <NavLink to='/service'><button className="flex items-center gap-2 p-2 rounded-[15px]">Service</button></NavLink> */}
                 </div>
                 <div className="flex items-center ">
-                    <Stack spacing={2} sx={{ width: 300 }}>
+                    {/* <Stack spacing={2} sx={{ width: 300 }}>
                         <Autocomplete
                             freeSolo
                             id="free-solo-2-demo"
@@ -76,7 +76,7 @@ function Navbar() {
                                 />
                             )}
                         />
-                    </Stack>
+                    </Stack> */}
                     <NavLink to="/cart" className="relative">
                         <button className="flex items-center gap-2 p-2 rounded-[15px]">
                             <ShoppingCartOutlinedIcon />
