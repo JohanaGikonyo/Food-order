@@ -57,7 +57,7 @@ function Navbar() {
                 </div>
                 <div className="flex items-center ">
                     <Stack spacing={1} sx={{
-                        width: 200
+                        width: 150
 
                     }
                     } >
